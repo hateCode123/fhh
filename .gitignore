@@ -1,0 +1,10 @@
+node_modules
+dist/*
+devtmp/*
+tmp
+logs
+.vscode
+.idea
+tools
+bin/dev_webpack_config
+.history
