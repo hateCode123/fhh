@@ -5,15 +5,23 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from '../common/store';
 
+import auth from '@ifeng/ui_pc_auth';
+
 import './reset.css';
 import Layout from './layout/';
 
-ReactDOM.render(
-    <Provider store={store}>
-        <Layout />
-    </Provider>,
-    document.getElementById('root'),
-);
+const isLogin = auth.isLogin();
+
+if (!isLogin) {
+    ReactDOM.render(
+        <Provider store={store}>
+            <Layout />
+        </Provider>,
+        document.getElementById('root'),
+    );
+} else {
+    window.location.href = '/index';
+}
 
 // /* eslint-disable no-undef */
 // ReactDOM.render(

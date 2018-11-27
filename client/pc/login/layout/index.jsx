@@ -13,7 +13,7 @@ import auth, { LoginDialog } from '@ifeng/ui_pc_auth';
  */
 // import Content from './content/';
 
-import { userLogin } from '../../services/api.js';
+// import { userLogin } from '../../services/';
 
 class Layout extends React.PureComponent {
     static propTypes = {
@@ -29,6 +29,7 @@ class Layout extends React.PureComponent {
 
     componentDidMount() {
         this.unBindLogin = auth.event.on(auth.EVENTNAMES.login, userInfo => {
+            console.log('userInfo= ', userInfo);
             this.setState({
                 userInfo,
             });
@@ -45,18 +46,17 @@ class Layout extends React.PureComponent {
         this.unBindLogout();
     }
 
-    login = () => {
-        userLogin();
-    };
+    // login = () => {
+    //     userLogin();
+    // };
 
     handleLoginIn = () => {
-        console.log('</button>');
         auth.login(this.loginId);
     };
 
-    handleLoginOut = () => {
-        auth.logout();
-    };
+    // handleLoginOut = () => {
+    //     auth.logout();
+    // };
 
     render() {
         /**
@@ -66,39 +66,13 @@ class Layout extends React.PureComponent {
 
         console.log(content);
 
-        const isLogin = auth.isLogin();
-
-        console.log('isLogin= ', isLogin, this.loginId);
-
-        let login = '';
-
-        if (isLogin) {
-            // window.location.href = '/index';
-
-            login = (
-                <Fragment>
-                    <Header />
-                    <div className={style.col}>
-                        <Sider />
-                        {/* <Content /> */}
-
-                        <button onClick={this.login}>测试接口</button>
-                    </div>
-                    <Footer />
-                    <BottomAffix />
-                </Fragment>
-            );
-        } else {
-            login = (
-                <div className={style.login}>
-                    <button onClick={this.handleLoginIn}>登录</button>;
-                    {/* {option.map(item => (iconShow ? iconOptions[item] : options[item]))} */}
-                    <LoginDialog id={this.loginId} />
-                </div>
-            );
-        }
-
-        return login;
+        return (
+            <div className={style.login}>
+                <button onClick={this.handleLoginIn}>点击登录</button>
+                {/* {option.map(item => (iconShow ? iconOptions[item] : options[item]))} */}
+                <LoginDialog id={this.loginId} />
+            </div>
+        );
     }
 }
 

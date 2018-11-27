@@ -15,6 +15,8 @@
 // import { APIHOST } from '../config';
 // import { logoutWithoutOffline } from '../common/models/user';
 
+import { dealAccountStatus } from './dealAccountStatus';
+
 import { ajax } from '@ifeng/ui_base';
 
 export default async function request(url, options) {
@@ -25,13 +27,7 @@ export default async function request(url, options) {
     try {
         console.log('result=', result);
 
-        switch (result.code) {
-            case 200:
-                return result.data;
-
-            default:
-                throw new Error(result.message);
-        }
+        dealAccountStatus(result);
     } catch (error) {
         console.error('request error url = ', url, ', error is ', error);
         throw error;

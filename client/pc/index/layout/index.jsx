@@ -12,15 +12,9 @@ import Sider from '../../components/sider/';
  */
 // import Content from './content/';
 
-import { userLogin } from '../../services/api.js';
-
 class Layout extends React.PureComponent {
     static propTypes = {
         content: PropTypes.object,
-    };
-
-    login = () => {
-        userLogin();
     };
 
     render() {

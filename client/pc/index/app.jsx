@@ -8,13 +8,20 @@ import store from '../common/store';
 import './reset.css';
 import Layout from './layout/';
 
-ReactDOM.render(
-    <Provider store={store}>
-        <Layout />
-    </Provider>,
-    document.getElementById('root'),
-);
+import auth from '@ifeng/ui_pc_auth';
 
+const isLogin = auth.isLogin();
+
+if (isLogin) {
+    ReactDOM.render(
+        <Provider store={store}>
+            <Layout />
+        </Provider>,
+        document.getElementById('root'),
+    );
+} else {
+    window.location.href = `/login?url=${window.location.href}`;
+}
 // /* eslint-disable no-undef */
 // ReactDOM.render(
 //     <div>
