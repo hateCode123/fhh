@@ -2,9 +2,7 @@
  * 后台服务入口
  */
 const logger = require('./biz/common/logger');
-const {
-    jaegerInit
-} = require('./biz/common/jaeger');
+const { jaegerInit } = require('./biz/common/jaeger');
 const config = require('./biz/configs');
 const Koa = require('koa');
 const path = require('path');
@@ -24,9 +22,7 @@ const pid = process.pid;
 // const gracefulShutdown = require('./biz/common/shutdown');
 
 // 普罗米修斯
-const {
-    promInit
-} = require('./biz/common/prom');
+const { promInit } = require('./biz/common/prom');
 const env = process.env.NODE_ENV || 'development';
 
 // 创建koa实例
@@ -51,12 +47,16 @@ if (env === 'development') {
     app.use(koaStatic(path.join(__dirname, 'node_modules/socket.io-client/dist')));
 
     // 静态资源设置
-    app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), {
-        index: 'index.html'
-    }));
-    app.use(koaStatic(path.join(__dirname, './static'), {
-        index: 'index.html'
-    }));
+    app.use(
+        koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), {
+            index: 'index.html',
+        }),
+    );
+    app.use(
+        koaStatic(path.join(__dirname, './static'), {
+            index: 'index.html',
+        }),
+    );
 
     setTimeout(() => {
         io.sockets.emit('reload');
@@ -67,21 +67,30 @@ if (env === 'development') {
         io.sockets.emit('reload');
     });
 
-    const proxy = require('koa-proxies');
+    const proxy = require('koa-better-http-proxy');
 
-    // 代理设置
-    app.use(
-        proxy('/napi', {
-            target: 'http://test0.fhh.ifeng.com/napi',
-            changeOrigin: true,
-            logs: true,
-        }),
-    );
+    const selfProxy = (from, to) => {
+        return async (ctx, next) => {
+            if (ctx.url.indexOf(from) === 0) {
+                return await proxy(to, {
+                    proxyReqPathResolver: ctx => {
+                        console.log(ctx.headers['host'] + ctx.url, '-->', to + ctx.url);
+                    },
+                })(ctx);
+            } else {
+                await next();
+            }
+        };
+    };
+
+    app.use(selfProxy('/napi', 'http://test0.fhh.ifeng.com'));
 } else if (env === 'pre_development') {
     // 静态资源设置
-    app.use(koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), {
-        index: 'index.html'
-    }));
+    app.use(
+        koaStatic(path.join(__dirname, `./${config.default.viewsdir}`), {
+            index: 'index.html',
+        }),
+    );
     views = require('koa-views');
 } else {
     views = require('koa-views');
@@ -101,7 +110,7 @@ promInit(app);
 app.use(async (ctx, next) => {
     if (ctx.url === '/heartbeat') {
         return (ctx.body = {
-            success: true
+            success: true,
         });
     }
     let sourcePath = ctx.url;
@@ -118,10 +127,7 @@ app.use(async (ctx, next) => {
     ctx.rpcTime = 0;
     ctx.routerTime = 0;
     ctx.routerTimeStart = process.hrtime();
-    ctx.rpcTimeList = [
-        [],
-        []
-    ];
+    ctx.rpcTimeList = [[], []];
     ctx.randerTime = 0;
     ctx.errorCount = 0;
     ctx.rpcList = [];
@@ -156,7 +162,7 @@ app.use(async (ctx, next) => {
                 event: 'error',
                 'error.object': err,
                 message: err.message,
-                stack: err.stack
+                stack: err.stack,
             });
         }
     }
@@ -213,11 +219,13 @@ app.use(bodyParser());
 app.use(json());
 
 // 模板引擎设置
-app.use(views(path.join(__dirname, `./${config.default.viewsdir}`), {
-    map: {
-        html: 'ejs'
-    }
-}));
+app.use(
+    views(path.join(__dirname, `./${config.default.viewsdir}`), {
+        map: {
+            html: 'ejs',
+        },
+    }),
+);
 
 // 路由重写，根据项目需要在rewrite中添加重写规则
 app.use(rewrite);
@@ -231,11 +239,11 @@ app.use(routers.routes(), routers.allowedMethods());
 ['SIGINT', 'SIGTERM'].forEach(signal => {
     process.on(signal, () => {
         console.info({
-            signal
+            signal,
         });
         setTimeout(() => {
             console.info({
-                signal: 'process.exit'
+                signal: 'process.exit',
             });
             process.exit();
         }, 20000);
