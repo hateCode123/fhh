@@ -1,0 +1,20 @@
+.head_name {
+    float: right;
+    color: #fff;
+    line-height: 60px;
+
+    & span {
+        float: left;
+        margin: 0 10px;
+    }
+}
+
+.user_name {
+    float: left;
+    cursor: pointer;
+}
+
+.tc {
+    float: left;
+    cursor: pointer;
+}

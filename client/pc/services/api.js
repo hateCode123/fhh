@@ -1,10 +1,8 @@
-import { jsonp, ajax } from '@ifeng/ui_base';
+import { request } from '../utils/';
 
-// 查询股票，资金，证券等数据
-const login = async (type, str) => {
-    return await ajax('/login', {
+// 接口: 名称关键字校验
+export const userLogin = async (type, str) => {
+    return await request('/napi/account/queryinfo', {
         cache: false,
     });
 };
-
-export { login };

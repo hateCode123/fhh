@@ -70,6 +70,8 @@
         "@ifeng/tool_f.lib.upload2": "^1.0.2",
         "@ifeng/tool_gulp_cdn_replace": "0.0.2",
         "@ifeng/ui_base": "^1.0.8",
+        "@ifeng/ui_pc_auth": "^1.0.8",
+        "@ifeng/ui_rel": "^1.0.0",
         "@ifengbuild/postcss-adaptive": "^1.0.1",
         "babel-eslint": "^8.2.2",
         "babel-loader": "^8.0.0",
@@ -119,6 +121,9 @@
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
         "react-loadable": "^5.4.0",
+        "react-redux": "^5.1.1",
+        "redux": "^4.0.1",
+        "redux-thunk": "^2.3.0",
         "shelljs": "^0.8.1",
         "socket.io": "^2.1.0",
         "style-loader": "^0.21.0",
@@ -129,7 +134,7 @@
         "webpack-bundle-analyzer": "^2.11.1",
         "webpack-chunk-hash": "^0.6.0",
         "webpack-cli": "^3.0.3",
-        "webpack-dev-server": "^3.1.4",
+        "webpack-dev-server": "^3.1.10",
         "write-file-webpack-plugin": "^4.2.0"
     },
     "config": {
@@ -155,6 +160,7 @@
             "./biz/**/**/**.js": "eslint"
         },
         "ignore": [
+            "./client/**",
             "./dist/**",
             "./static/**",
             "./biz/providers/**",

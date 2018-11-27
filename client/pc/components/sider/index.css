@@ -1,0 +1,95 @@
+.col_left {
+    width: 180px;
+    float: left;
+    background: #fff;
+}
+
+.list_index {
+    font-family: 'Microsoft YaHei';
+    padding: 15px 0;
+}
+
+.list_index ul {
+}
+
+.list_index ul li {
+    display: block;
+}
+
+.list_index ul li:hover {
+    background: #f6f6f6;
+}
+
+.list_index ul li.cur,
+.list_index ul li.cur:hover {
+    background: url(./images/li_current.jpg) no-repeat;
+}
+
+.list_index ul li.cur a {
+    color: #fff;
+}
+
+.list_index ul li a {
+    font-size: 14px;
+    color: #333333;
+    line-height: 38px;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+.list_index p {
+    margin-left: 13px;
+    padding-left: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 36px;
+}
+
+.list_index p a {
+    color: #2b2b2b;
+    text-decoration: none;
+}
+
+.list_index_tit {
+    background: url(./images/index_icon.png) no-repeat left center;
+}
+
+.list_img_tit {
+    background: url(./images/tuwen.png) no-repeat left center;
+    color: #666;
+}
+
+.list_video_tit {
+    background: url(./images/video_icon.png) no-repeat left center;
+    color: #666;
+}
+
+.list_nr_tit {
+    background: url(./images/tit_icon.png) no-repeat left center;
+}
+
+.list_index .current {
+    background: url(./images/index_icon_cur.png) no-repeat left center;
+}
+
+.list_index .current a {
+    color: #f54343;
+}
+
+.list_index ul li span,
+.gongg li b {
+    width: 21px;
+    height: 9px;
+    display: inline-block;
+    vertical-align: text-top;
+    margin-left: 3px;
+}
+
+.list_index ul li span img,
+.gongg li b img {
+    display: block;
+}
+
+.bor_top {
+    border-top: solid 1px #e5e5e5;
+}

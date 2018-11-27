@@ -1,0 +1,9 @@
+.footer {
+    width: 1200px;
+    margin: 90px auto 0;
+
+    color: #999999;
+    font-family: 'Microsoft YaHei';
+    text-align: center;
+    padding: 35px 0;
+}

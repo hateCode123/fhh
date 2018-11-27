@@ -1,0 +1,191 @@
+/* 列表 */
+
+.clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.list {
+    width: 1000px;
+
+    position: relative;
+}
+
+.list .wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+}
+
+.list a {
+    color: #000;
+}
+
+.list a:hover {
+    color: #009ee0;
+    text-decoration: none;
+}
+
+.list ul {
+    /*margin-bottom:47px*/
+}
+
+.li01 {
+    width: 100%;
+    margin-bottom: 10px;
+    composes: clearfix from global;
+}
+
+.d01 {
+    float: left;
+    overflow: hidden;
+    width: 750px;
+    cursor: pointer;
+    height: 376px;
+}
+
+.d01 img {
+    -webkit-transition: all 1.2s;
+    -moz-transition: all 1.2s;
+    -o-transition: all 1.2s;
+    transition: all 1.2s;
+}
+
+.d01 a:hover img {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.d02 {
+    float: right;
+    width: 232px;
+    overflow: hidden;
+}
+
+.p11 {
+    background: url(//p0.ifengimg.com/fe/news_zairenjian_homepage/images/num_bg_b74675c2.jpg);
+    width: 65px;
+    height: 33px;
+
+    font-size: 14px;
+    text-align: center;
+    line-height: 33px;
+    color: #666666;
+    font-family: 'Microsft YaHei';
+    font-weight: bold;
+}
+
+.p12 {
+    font-family: 'Microsoft YaHei';
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 21px;
+    line-height: 26px;
+    margin-bottom: 20px;
+}
+
+.p13 {
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    margin-top: 6px;
+
+    color: #999999;
+    composes: clearfix from global;
+}
+
+.p13 li {
+    font-size: 12px;
+    float: left;
+}
+
+.author_name {
+    margin-left: 6px;
+}
+
+.type_author {
+    padding: 0 8px;
+    border: 1px solid #999999;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.each_comment {
+    font-size: 14px;
+    color: #00a0e7;
+    padding-left: 22px;
+    background: url(//p0.ifengimg.com/fe/news_zairenjian_homepage/images/comment2_1f32a1ea.png) top left no-repeat;
+    margin-bottom: 22px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: 'Georgia';
+}
+
+.each_comment:hover {
+    background: url(//p0.ifengimg.com/fe/news_zairenjian_homepage/images/comment3_a7c86d5e.png) top left no-repeat;
+}
+
+/* 
+.each_comment a {
+    font-size: 14px;
+    color: #999999;
+}
+
+.each_comment a:hover {
+    font-size: 14px;
+    color: #00a0e7;
+}
+ */
+
+.p14 {
+    width: 230px;
+    color: #666;
+    line-height: 24px;
+    font-size: 14px;
+}
+
+/* ================= */
+
+.floatright {
+}
+
+.morebtn {
+    cursor: pointer;
+}
+
+.more {
+    display: block;
+    width: 750px;
+    height: 39px;
+    background: url('//p0.ifengimg.com/fe/news_zairenjian_homepage/images/show_more_71db437e.jpg') no-repeat 0 0;
+
+    line-height: 39px;
+    color: #999999;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.more_box {
+    width: 750px;
+    text-align: center;
+}
+
+.is_end {
+    display: inline-block;
+    font-size: 14px;
+    color: #999;
+}
+
+.is_end {
+    padding: 3px;
+}

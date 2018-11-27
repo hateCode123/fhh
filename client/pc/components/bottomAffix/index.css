@@ -1,0 +1,49 @@
+.fix_top {
+    width: 60px;
+    height: 162px;
+    background: #fff;
+    border-radius: 4px;
+    position: fixed;
+    left: 50%;
+    margin-left: 620px;
+    bottom: 100px;
+    font-family: 'Microsoft YaHei';
+}
+
+.fix_top ul li.wt,
+.fix_top ul li.fk {
+    background: url(./images/wenti.png) no-repeat center 8px;
+    border-bottom: solid 1px #e5e5e5;
+    height: 20px;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.fix_top ul li.wt a,
+.fix_top ul li.fk a {
+    color: #666666;
+    text-decoration: none;
+}
+
+.fix_top ul li.wt:hover {
+    background: #f6f6f6 url(./images/wenti.png) no-repeat center 8px;
+}
+
+.fix_top ul li.fk {
+    background: url(./images/fankui.png) no-repeat center 8px;
+}
+
+.fix_top ul li.fk:hover {
+    background: #f6f6f6 url(./images/fankui.png) no-repeat center 8px;
+}
+
+.fix_top ul li.Top {
+    background: url(./images/fix_toop.png) no-repeat center 13px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.fix_top ul li.Top:hover {
+    background: #f6f6f6 url(./images/fix_toop.png) no-repeat center 13px;
+}

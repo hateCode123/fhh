@@ -1,9 +1,9 @@
 exports.login = {
-    path: '/login',
+    path: '/(index)?',
     method: 'get',
     type: 'html',
     online: true,
     handler: async ctx => {
-        await ctx.html('login', {});
+        await ctx.html('index', {});
     },
 };

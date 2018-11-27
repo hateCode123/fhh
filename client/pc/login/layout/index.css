@@ -1,0 +1,19 @@
+/* body {
+    font-family: Microsoft YaHei;
+} */
+
+/* .bottom {
+    width: 1px;
+    height: 1px;
+} */
+
+.bg {
+    background: #f8f0e6;
+}
+
+.col {
+    composes: clearfix from global;
+
+    width: 1200px;
+    margin: 90px auto 0;
+}
