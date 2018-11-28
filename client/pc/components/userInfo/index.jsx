@@ -7,24 +7,44 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
+import auth from '@ifeng/ui_pc_auth';
+import { resetStore } from '../../utils';
 /**
  * 定义 Header 组件
  */
 class UserInfo extends React.PureComponent {
     static propTypes = {
-        info: PropTypes.object,
+        user: PropTypes.object,
+        account: PropTypes.object,
     };
+
+    componentDidMount() {
+        this.unBindLogout = auth.event.on(auth.EVENTNAMES.logout, () => {
+            window.location.href = '/login';
+        });
+    }
+    componentWillUnmount() {
+        this.unBindLogout();
+    }
+
+    handleLoginOut = () => {
+        auth.logout();
+        // resetStore();
+    };
+
     /**
      * 渲染组件
      */
     render() {
-        console.log(this.props.info);
+        console.log(this.props.user);
 
         return (
             <div className={style.head_name}>
                 <div className={style.user_name}>用户名称用户</div>
                 <span>|</span>
-                <div className={style.tc}>退出</div>
+                <div onClick={this.handleLoginOut} className={style.tc}>
+                    退出
+                </div>
             </div>
         );
     }
@@ -32,7 +52,8 @@ class UserInfo extends React.PureComponent {
 
 // export default Container;
 const mapStateToProps = state => ({
-    info: state,
+    user: state.user.info,
+    account: state.user.accountInfo,
     // dictionary: state.dictionary,
 });
 

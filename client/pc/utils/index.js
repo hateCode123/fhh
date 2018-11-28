@@ -9,10 +9,17 @@ export * from './reduxUtil';
 // export * from './login';
 // export * from './resetAll';
 // export * from './examUtil';
-export { default as request } from './request';
+export {
+    default as request
+}
+from './request';
 
 export * from './getAccountStatus';
 
 export * from './checkAccountStatus';
 
-export * from './dealAccountStatus';
+export * from './accountStatusHandler';
+
+export * from './cookies';
+
+export * from './requestResponseHandler';

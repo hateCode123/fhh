@@ -9,39 +9,53 @@
  * @desc 状态7、审核通过，跳转首页
  * @desc 状态8、下线
  */
-import { dealAccountStatus, checkAccountStatus } from './index';
-import { queryinfo } from '../services/';
+import { accountStatusHandler, checkAccountStatus, setUserInfoStore, getCookie } from './index';
+// import { queryinfo } from '../services/';
+
+/**
+ * @func 从接口获取用户信息，根据状态进行页面跳转
+ */
 
 export const getAccountStatus = async () => {
     try {
         console.log('getAccountStatus');
 
+        const userName = getCookie('IF_USER');
+        const IFUserInfo = { weMediaName: userName };
+
+        await setUserInfoStore(IFUserInfo);
+
         // const accountInfo = await queryinfo();
 
         const accountInfo = {
-            weMediaId: '58576cb2951f464ba7828d01',
-            eAccountId: 370804,
-            weMediaName: '苹果冬瓜茄子',
+            weMediaId: '58576cb2951f464ba7828d01', // 自媒体账号id
+            eAccountId: 370804, // 自媒体账号数值id
+            weMediaName: '苹果冬瓜茄子', // 自媒体名称
             weMediaImg:
-                'http://d.ifengimg.com/q100/img1.ugc.ifeng.com/newugc/20180730/16/wemedia/e80ed7b4e871e0de9085ca727283460e24e0241c_size59_w200_h200.png',
-            fhtId: '76916822',
-            status: '1',
-            accountLevel: '12',
-            systemOfflineReason: '',
-            accountType: '1',
-            remainingPubNum: '0',
-            mcnInfo: '苹果冬瓜茄子MCN组织管理员',
-            subId: '370804',
-            mcnId: '370804',
-            mcnName: '苹果冬瓜茄子',
-            isMcnManager: '2',
-            honorName: '大风号荣誉主笔',
-            honorImg: 'http://p0.ifengimg.com/a/2018/0929/8c6f0f95dd440aesize5_w54_h54.png',
+                'http://d.ifengimg.com/q100/img1.ugc.ifeng.com/newugc/20180730/16/wemedia/e80ed7b4e871e0de9085ca727283460e24e0241c_size59_w200_h200.png', // 自媒体头像
+            fhtId: '76916822', // 凤凰通id
+            status: '2', // 账号状态（1：待审核 ，2：审核通过，,3：审核未通过,4:永久审核不通过）
+            accountLevel: '6', // 账号等级
+            systemOfflineReason: '', // 系统下线原因
+            accountType: '1', // 账号类型（1：凤凰账号，2：签约账号，3：视频账号，4：一点账号 , 5: UGC账号 ，6:  体验账号,）
+            remainingPubNum: '0', // 当前剩余体验文章数
+            mcnInfo: '苹果冬瓜茄子MCN组织管理员', // mcn信息描述
+            subId: '370804', // mcn子账号id
+            mcnId: '370804', // mcn母账号id
+            mcnName: '苹果冬瓜茄子', // mcn名称
+            isMcnManager: '2', // 是否是mcn管理员  2：是mcn主账号；1:是mcn子账号；0：不是mcn主账号或者不属于任何MCN组
+            honorName: '大风号荣誉主笔', // 荣誉体系名称
+            honorImg: 'http://p0.ifengimg.com/a/2018/0929/8c6f0f95dd440aesize5_w54_h54.png', // 荣誉体系头像
+            online: 2, // 上下线状态  （0:默认 1：下线，2：上线）
+            offlineReason: '资料不全被下线', // 账号下线原因
+            auditReason: '资料不合规审核不通过', // 审核不通过原因
         };
 
-        const status = checkAccountStatus(accountInfo);
+        const status = await checkAccountStatus(accountInfo);
 
-        return dealAccountStatus(status);
+        console.log('status=', status);
+
+        return accountStatusHandler(status);
     } catch (e) {
         console.error(e);
 

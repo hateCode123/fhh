@@ -1,13 +1,20 @@
 const currentURL = window.location.pathname;
 
-
-export const dealAccountStatus = (result) => {
+/**
+ * @func 根据code码，决定页面跳转去哪里
+ * @param {*} result 
+ */
+export const accountStatusHandler = result => {
     try {
+        console.log('accountStatusHandler', result);
+
         let url = '/login';
 
         switch (result.code) {
+
             case 200:
                 return result.data;
+
             case 1001:
                 // 账号未登录
                 url = '/login';
@@ -21,7 +28,7 @@ export const dealAccountStatus = (result) => {
                 url = '/wait';
                 break;
             case 1004:
-                // 账号已下线 
+                // 账号已下线
                 url = '/offline';
                 break;
             case 1005:
@@ -30,6 +37,7 @@ export const dealAccountStatus = (result) => {
                 break;
             case 1009:
             case 4001:
+            case 0:
                 // 非法请求
                 // 暂无权限访问
                 url = '/index';
@@ -37,13 +45,11 @@ export const dealAccountStatus = (result) => {
 
             default:
                 throw new Error(result.message);
-
-
         }
 
         if (currentURL !== url) window.location.href = url;
-
     } catch (e) {
-        throw (e);
+        console.error(e);
+        throw e;
     }
-}
+};

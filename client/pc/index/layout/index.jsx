@@ -23,8 +23,6 @@ class Layout extends React.PureComponent {
          */
         const { content } = this.props;
 
-        console.log(content);
-
         return (
             <Fragment>
                 <Header />

@@ -1,20 +1,17 @@
-import { createReducers, createActions, request, sleep } from '../../utils';
+import { createReducers, createActions } from '../../utils';
 import { combineReducers } from 'redux';
 import store from '../store';
-
-const urls = {
-    // userOffline: APIHOST + '/logic/user/offline',
-    // login: APIHOST + '/login-server/login',
-    // getRoles: APIHOST + '/auth-server/userInfo',
-};
 
 const path = name => `common:user:${name}`;
 
 const models = {
+    // 接口获取的自媒体账号的信息
     info: {
         data: {},
+
         handlers: {
             login(state, action) {
+                console.log('actions.login', action)
                 // localStorage.setItem('__tokenIFengCheckSys', action.payload.access_token);
 
                 return {
@@ -39,16 +36,21 @@ const models = {
             },
         },
     },
+
+    // 根据数据计算得出的账号状态
+
     accountInfo: {
         data: {},
         handlers: {
+            setAccountInfo(state, action) {
+                return {
+                    ...action.payload,
+                };
+            },
             updateAccountInfo(state, action) {
-                // localStorage.setItem('__tokenIFengCheckSys', action.payload.access_token);
-
                 return {
                     ...state,
                     ...action.payload,
-                    // token: action.payload.access_token,
                 };
             },
         },

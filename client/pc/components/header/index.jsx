@@ -5,7 +5,7 @@ import { rel } from '@ifeng/ui_rel';
 import UserInfo from '../userInfo/';
 import logo from './images/logo.png';
 
-import { getAccountStatus } from '../../utils/getAccountStatus';
+import { getAccountStatus } from '../../utils';
 
 /**
  * 定义 Header 组件

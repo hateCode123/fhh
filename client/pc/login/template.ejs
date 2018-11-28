@@ -5,13 +5,13 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="always" name="referrer">
-    <title>登录</title>
+    <title>大风号-媒体开放平台</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     {{{ htmlWebpackPlugin.options.errorupload }}}
 
     {{#each htmlWebpackPlugin.files.css}}
-    <link href="{{path}}" rel="stylesheet"> 
+    <link href="{{path}}" rel="stylesheet">
     {{/each}}
 
     {{{ htmlWebpackPlugin.options.polyfill }}}
@@ -23,20 +23,20 @@
 
     {{#if htmlWebpackPlugin.options.useMorden}}
     {{#if htmlWebpackPlugin.options.isDevMode}}
-        {{#each htmlWebpackPlugin.files.js}}
-            <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
-        {{/each}}
+    {{#each htmlWebpackPlugin.files.js}}
+    <script type="module" src="{{path}}_modern.js" type="text/javascript" crossorigin="anonymous"></script>
+    {{/each}}
     {{else}}
-        <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
+    <!--include file="{{htmlWebpackPlugin.options.includeName}}.html" -->
     {{/if}}
     {{{htmlWebpackPlugin.options.modernPolyfill}}}
     {{#each htmlWebpackPlugin.files.js}}
-        <script nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script nomodule src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
     {{/each}}
     {{else}}
-        {{#each htmlWebpackPlugin.files.js}}
-            <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
-        {{/each}}
+    {{#each htmlWebpackPlugin.files.js}}
+    <script src="{{path}}" type="text/javascript" crossorigin="anonymous"></script>
+    {{/each}}
     {{/if}}
 
 
