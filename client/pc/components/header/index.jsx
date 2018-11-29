@@ -16,7 +16,7 @@ class Header extends React.PureComponent {
      */
 
     componentDidMount() {
-        getAccountStatus();
+        // getAccountStatus();
     }
 
     render() {

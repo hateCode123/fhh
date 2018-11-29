@@ -2,7 +2,7 @@ const currentURL = window.location.pathname;
 
 /**
  * @func 根据接口返回的code码，决定页面跳转去哪里
- * @param {*} result 
+ * @param {*} result
  */
 export const requestResponseHandler = result => {
     try {
@@ -11,7 +11,7 @@ export const requestResponseHandler = result => {
         let url = '/login';
 
         switch (result.code) {
-            case 200:
+            case 1000:
                 return result.data;
             case 1001:
                 // 账号未登录
