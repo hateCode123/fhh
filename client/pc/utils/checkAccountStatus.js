@@ -35,7 +35,6 @@ export const setUserInfoStore = async data => {
  */
 
 export const queryinfoHandler = sourceData => {
-    console.log('queryinfoHandler', Object.keys(sourceData).length);
     const result = {
         code: 201, // 如果没有根据接口判断出状态，就返回201，在下一步中只抛错不跳转
         status: 201,
@@ -61,10 +60,14 @@ export const queryinfoHandler = sourceData => {
     } else {
         // isMcnManager
 
-        const isMcnManager = sourceData.isMcnManager && sourceData.isMcnManager === 2;
-        const isMcnStaff = sourceData.isMcnManager && sourceData.isMcnManager === 1;
+        const isMcnManager = sourceData.isMcnManager && sourceData.isMcnManager === '2';
+        const isMcnStaff = sourceData.isMcnManager && sourceData.isMcnManager === '1';
 
         const isHonor = sourceData.honorName && sourceData.honorName !== '';
+
+        result.isMcnManager = isMcnManager;
+        result.isMcnStaff = isMcnStaff;
+        result.isHonor = isHonor;
 
         if (isTiyanqi) {
             result.code = 0;
@@ -116,8 +119,6 @@ export const queryinfoHandler = sourceData => {
 export const checkAccountStatus = async sourceData => {
     try {
         // @todo: 数据正确就把这的计算结果存储到localstorage和store里面
-
-        console.log('checkAccountStatus  ', sourceData);
 
         await setUserInfoStore(sourceData);
 

@@ -21,7 +21,9 @@ export const getAccountStatus = async () => {
         console.log('getAccountStatus');
 
         const userName = getCookie('IF_USER');
-        const IFUserInfo = { weMediaName: userName };
+        const IFUserInfo = {
+            weMediaName: userName,
+        };
 
         await setUserInfoStore(IFUserInfo);
 

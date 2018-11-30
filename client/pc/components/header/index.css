@@ -16,7 +16,7 @@
 
 .w_1200 {
     composes: clearfix from global;
-
+    position: relative;
     width: 1200px;
     margin: 0 auto;
     font-family: 'Microsoft YaHei';

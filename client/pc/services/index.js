@@ -3,3 +3,4 @@
  * */
 export * from './queryInfo';
 export * from './userLogin';
+export * from './privilegeListOpened';

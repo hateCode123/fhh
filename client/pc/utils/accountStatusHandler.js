@@ -2,16 +2,13 @@ const currentURL = window.location.pathname;
 
 /**
  * @func 根据code码，决定页面跳转去哪里
- * @param {*} result 
+ * @param {*} result
  */
 export const accountStatusHandler = result => {
     try {
-        console.log('accountStatusHandler', result);
-
         let url = '/login';
 
         switch (result.code) {
-
             case 200:
                 return result.data;
 
@@ -21,7 +18,7 @@ export const accountStatusHandler = result => {
                 break;
             case 1002:
                 // 账号未注册
-                url = '/chooseType';
+                url = '/signup/chooseType';
                 break;
             case 1003:
                 //  账号审核中
