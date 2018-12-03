@@ -164,28 +164,6 @@
     background: url(./images/icon1.png) no-repeat -2px -212px;
 }
 
-.xf {
-    float: right;
-    width: 50px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 16px;
-    color: #ffffff;
-    font-family: 'Microsoft YaHei';
-    cursor: pointer;
-}
-
-.xfSpan {
-    float: left;
-    opacity: 0.5;
-}
-
-.xf p {
-    width: 30px;
-    float: left;
-    margin-left: 5px;
-}
-
 .box:hover {
     & .about {
         background: url(./images/sj1.png) 162px center no-repeat #d23537;
