@@ -9,7 +9,7 @@ import logo from './images/logo.png';
 import UserInfo from '../userInfo/';
 import UserInfoWidthMCN from '../userInfoWithMCN';
 
-import { getAccountStatus } from '../../utils';
+// import { getAccountStatus } from '../../utils';
 
 import style from './index.css';
 
@@ -25,9 +25,9 @@ class Header extends React.PureComponent {
      * 渲染组件
      */
 
-    componentDidMount() {
-        getAccountStatus();
-    }
+    // componentDidMount() {
+    //     getAccountStatus();
+    // }
 
     render() {
         const { account } = this.props;

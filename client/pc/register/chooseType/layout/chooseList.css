@@ -1,0 +1,58 @@
+.register_choose {
+    width: 1000px;
+    height: 650px;
+    background: #fff;
+    margin: 0 auto;
+}
+.register_choose ul li {
+    width: 240px;
+    height: 360px;
+    background: #fef3eb;
+    border-radius: 4px;
+    float: left;
+    border: solid 2px #fff;
+    margin: 0 28px;
+}
+.register_choose ul {
+    overflow: hidden;
+    font-family: 'Microsoft YaHei';
+    padding-top: 80px;
+    margin-left: 50px;
+    padding-bottom: 210px;
+}
+.tu_re {
+    width: 240px;
+    height: 220px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.register_choose ul li a {
+    display: block;
+    text-decoration: none;
+}
+.tu_txt {
+    text-align: center;
+    background: #ffe7c6;
+    height: 140px;
+    padding: 0 20px;
+    overflow: hidden;
+}
+.tu_txt p {
+    font-size: 22px;
+    color: #333333;
+    margin-top: 12px;
+}
+.tu_txt span {
+    color: #333333;
+    font-size: 14px;
+    line-height: 28px;
+    padding-top: 8px;
+    display: block;
+}
+.register_choose ul li:hover {
+    border: solid 2px #f54343;
+}
+.register_ul {
+    margin-top: 25px;
+}

@@ -1,0 +1,72 @@
+.zt_register {
+    width: 1000px;
+    height: 160px;
+    background: #f6f6f6;
+    font-family: 'Microsoft YaHei';
+    padding-top: 25px;
+    margin: 90px auto 0;
+}
+.register_lc {
+    width: 640px;
+    margin: 0 auto;
+    background: url(./images/register.png) no-repeat center top;
+    height: 125px;
+}
+.register_lc ul li {
+    float: left;
+    font-family: 'Microsoft YaHei';
+}
+.zc_01 {
+    background: url(./images/zc_01.png) no-repeat;
+    width: 80px;
+    height: 80px;
+    margin-right: 200px;
+    display: block;
+}
+.zc_01 a {
+    display: block;
+    width: 80px;
+    height: 80px;
+}
+.current {
+    background: #f54343;
+    color: #fff;
+}
+.zc_02,
+.zc_03 {
+    composes: current;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 200px;
+    text-align: center;
+    color: #cccccc;
+}
+.register_lc ul li.zc_03 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.zc_02 p,
+.zc_03 p {
+    color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.register_lc ul li.zc_02 span,
+.register_lc ul li.zc_03 span {
+    color: #fff;
+    font-size: 36px;
+    line-height: 36px;
+}
+.bt_register li {
+    width: 80px;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+    margin-top: 13px;
+}
+.bt_register li.cur {
+    color: #f54343;
+}
