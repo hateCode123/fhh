@@ -14,24 +14,20 @@ import imageXin from './images/xin.png';
  */
 class Message extends React.PureComponent {
     static propTypes = {
-        user: PropTypes.object,
+        messageNum: PropTypes.number,
     };
     /**
      * 渲染组件
      */
     render() {
-        const { user } = this.props;
-
-        console.log(this.props.user);
-
-        // opacity: 0.5;
+        const { messageNum } = this.props;
 
         return (
             <div className={style.xf}>
-                <span className={style.xfSpan}>
+                <span className={style.xfSpan} style={messageNum === 0 ? { opacity: '.5' } : {}}>
                     <img src={imageXin} />
                 </span>
-                <p />
+                {messageNum && messageNum !== 0 ? <p>{messageNum}</p> : null}
             </div>
         );
     }
@@ -39,7 +35,7 @@ class Message extends React.PureComponent {
 
 // export default Container;
 const mapStateToProps = state => ({
-    messageNum: state.messageNum,
+    messageNum: state.user.messageNum,
 });
 
 const mapDispatchToProps = dispatch => ({});

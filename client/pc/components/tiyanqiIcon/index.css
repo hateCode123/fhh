@@ -1,0 +1,95 @@
+.tyq {
+    position: relative;
+    float: right;
+    height: 20px;
+    margin-top: 19px;
+    color: #faa23b;
+    line-height: 20px;
+    font-family: 'Microsoft YaHei';
+    margin-right: 30px;
+    /* display: inline-block; */
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.tyq:hover {
+    & .ts_index,
+    & .sj_d {
+        display: block;
+    }
+}
+
+.tyq img {
+    vertical-align: text-top;
+    margin-left: 5px;
+}
+
+.ts_index i {
+    font-style: normal;
+    width: 260px;
+    margin: 10px auto;
+}
+
+.ts_tit_index {
+    font-size: 20px;
+    display: block;
+}
+
+.tit_txt {
+    width: 260px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 22px;
+    display: block;
+}
+
+.btn_index {
+    display: block;
+    width: 120px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 4px;
+    text-align: center;
+    margin: 0 auto;
+    background: #f54343;
+    font-weight: normal;
+}
+
+.btn_index a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.tit_txt b {
+    color: #f54343;
+}
+
+.ts_index {
+    position: absolute;
+    bottom: -236px;
+    width: 300px;
+    left: 50%;
+    margin-left: -154.5px;
+
+    line-height: 30px;
+    padding: 0 9px;
+    background: rgba(0, 0, 0, 0.75);
+
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    display: none;
+}
+
+.sj_d {
+    background: url(./images/sj_img01.png) no-repeat;
+    top: 16px;
+    margin-left: 16px;
+    width: 12px;
+    height: 6px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+
+    display: none;
+}

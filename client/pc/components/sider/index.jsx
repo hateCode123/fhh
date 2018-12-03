@@ -20,33 +20,33 @@ class Sider extends React.PureComponent {
             {
                 privilege: false,
                 content: '评论管理',
-                link: '',
+                link: '#',
                 title: '评论管理',
             },
             {
                 privilege: false,
                 content: '数据分析',
-                link: '',
+                link: '#',
                 title: '数据分析',
             },
             {
                 tiyanqiTips: true,
                 privilege: false,
                 content: '流量+',
-                link: '',
+                link: '#',
                 title: '流量+',
             },
             {
                 privilege: 'mcn',
                 content: 'MCN管理',
-                link: '',
+                link: '#',
                 title: 'MCN管理',
             },
             {
                 tiyanqiTips: true,
                 privilege: false,
                 content: '收益&结算',
-                link: '',
+                link: '#',
                 title: '收益&结算',
             },
         ],
@@ -54,32 +54,32 @@ class Sider extends React.PureComponent {
             {
                 privilege: false,
                 content: '图文管理',
-                link: '',
+                link: '#',
                 title: '图文管理',
             },
             {
                 privilege: false,
                 content: '发布文章',
-                link: '',
+                link: '#',
                 title: '发布文章',
             },
             {
                 tiyanqiTips: true,
                 privilege: false,
                 content: '发布图集',
-                link: '',
+                link: '#',
                 title: '发布图集',
             },
             {
                 privilege: false,
                 content: '图文数据',
-                link: '',
+                link: '#',
                 title: '图文数据',
             },
             {
                 privilege: 'originalProtection',
                 content: '原创保护',
-                link: '',
+                link: '#',
                 title: '原创保护',
             },
         ],
@@ -88,21 +88,21 @@ class Sider extends React.PureComponent {
                 tiyanqiTips: true,
                 privilege: false,
                 content: '视频管理',
-                link: '',
+                link: '#',
                 title: '视频管理',
             },
             {
                 tiyanqiTips: true,
                 privilege: false,
                 content: '发布视频',
-                link: '',
+                link: '#',
                 title: '发布视频',
             },
             {
                 tiyanqiTips: true,
                 privilege: false,
                 content: '视频数据',
-                link: '',
+                link: '#',
                 title: '视频数据',
             },
         ],
@@ -142,13 +142,13 @@ class Sider extends React.PureComponent {
             if ((item.privilege && privilegeList[item.privilege]) || !item.privilege) {
                 eachLine =
                     isTiyanqi && item.tiyanqiTips ? (
-                        <li>
+                        <li key={item.title}>
                             <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
                                 {item.content}
                             </a>
                         </li>
                     ) : (
-                        <li className={classNameStr}>
+                        <li className={classNameStr} key={item.title}>
                             <a href={item.link} target="_blank" rel={rel} title={item.title}>
                                 {item.content}
                             </a>

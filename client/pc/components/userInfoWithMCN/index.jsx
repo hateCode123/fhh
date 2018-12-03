@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '@ifeng/ui_rel';
 import auth from '@ifeng/ui_pc_auth';
-
+import Message from '../message';
+import TiyanqiIcon from '../tiyanqiIcon';
 import style from './index.css';
 import imageXin from './images/xin.png';
 /**
@@ -152,7 +153,10 @@ class UserInfoWidthMCN extends React.PureComponent {
                     {infoDom}
                     {hiddenDom}
                 </div>
-                {msgDom}
+                <Message />
+                {isTiyanqi ? <TiyanqiIcon /> : null}
+
+                {/* {msgDom} */}
             </Fragment>
         );
     }

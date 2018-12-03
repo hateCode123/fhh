@@ -66,6 +66,17 @@ const models = {
             },
         },
     },
+
+    messageNum: {
+        data: 0,
+        handlers: {
+            updateMessageNum(state, action) {
+                return {
+                    ...action.payload,
+                };
+            },
+        },
+    },
 };
 
 export const actions = createActions(models, path);
