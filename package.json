@@ -160,7 +160,6 @@
             "./biz/**/**/**.js": "eslint"
         },
         "ignore": [
-
             "./dist/**",
             "./static/**",
             "./biz/providers/**",
