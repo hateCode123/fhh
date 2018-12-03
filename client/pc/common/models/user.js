@@ -11,7 +11,7 @@ const models = {
 
         handlers: {
             login(state, action) {
-                console.log('actions.login', action)
+                console.log('actions.login', action);
                 // localStorage.setItem('__tokenIFengCheckSys', action.payload.access_token);
 
                 return {
@@ -50,6 +50,17 @@ const models = {
             updateAccountInfo(state, action) {
                 return {
                     ...state,
+                    ...action.payload,
+                };
+            },
+        },
+    },
+
+    privilegeList: {
+        data: {},
+        handlers: {
+            updatePrivilegeList(state, action) {
+                return {
                     ...action.payload,
                 };
             },

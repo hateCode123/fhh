@@ -9,17 +9,19 @@ export * from './reduxUtil';
 // export * from './login';
 // export * from './resetAll';
 // export * from './examUtil';
-export {
-    default as request
-}
-from './request';
-
-export * from './getAccountStatus';
-
-export * from './checkAccountStatus';
-
-export * from './accountStatusHandler';
+export { default as request } from './request';
+export * from './requestResponseHandler';
 
 export * from './cookies';
 
-export * from './requestResponseHandler';
+/**
+ * @func 获取自媒体用户信息及相应处理
+ */
+export * from './getAccountStatus';
+export * from './checkAccountStatus';
+export * from './accountStatusHandler';
+
+/**
+ * @func 获取自媒体用户权限及相应处理
+ */
+export * from './getAccountPrivilegeListOpened';

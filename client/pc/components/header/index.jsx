@@ -2,8 +2,9 @@ import React from 'react';
 import style from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '@ifeng/ui_rel';
-import UserInfo from '../userInfo/';
 import logo from './images/logo.png';
+import UserInfo from '../userInfo/';
+import UserInfoWidthMCN from '../userInfoWithMCN';
 
 // import { getAccountStatus } from '../../utils';
 
@@ -28,7 +29,8 @@ class Header extends React.PureComponent {
                             <img src={logo} width="120" height="36" />
                         </a>
                     </div>
-                    <UserInfo />
+                    {/* <UserInfo /> */}
+                    <UserInfoWidthMCN />
                 </div>
             </div>
         );

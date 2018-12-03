@@ -2,7 +2,9 @@
  * 后台服务入口
  */
 const logger = require('./biz/common/logger');
-const { jaegerInit } = require('./biz/common/jaeger');
+const {
+    jaegerInit
+} = require('./biz/common/jaeger');
 const config = require('./biz/configs');
 const Koa = require('koa');
 const path = require('path');
@@ -22,7 +24,9 @@ const pid = process.pid;
 // const gracefulShutdown = require('./biz/common/shutdown');
 
 // 普罗米修斯
-const { promInit } = require('./biz/common/prom');
+const {
+    promInit
+} = require('./biz/common/prom');
 const env = process.env.NODE_ENV || 'development';
 
 // 创建koa实例
@@ -83,7 +87,10 @@ if (env === 'development') {
         };
     };
 
+    app.use(selfProxy('/api', 'http://test0.fhh.ifeng.com'));
     app.use(selfProxy('/napi', 'http://test0.fhh.ifeng.com'));
+    app.use(selfProxy('/capi', 'http://test0.fhh.ifeng.com'));
+
 } else if (env === 'pre_development') {
     // 静态资源设置
     app.use(
@@ -127,7 +134,10 @@ app.use(async (ctx, next) => {
     ctx.rpcTime = 0;
     ctx.routerTime = 0;
     ctx.routerTimeStart = process.hrtime();
-    ctx.rpcTimeList = [[], []];
+    ctx.rpcTimeList = [
+        [],
+        []
+    ];
     ctx.randerTime = 0;
     ctx.errorCount = 0;
     ctx.rpcList = [];
