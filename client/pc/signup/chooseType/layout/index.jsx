@@ -6,6 +6,8 @@ import Header from '../../../components/header/';
 import Footer from '../../../components/footer/';
 import BottomAffix from '../../../components/bottomAffix/';
 import Sider from '../../../components/sider/';
+import Step from './step';
+import ChooseList from './chooseList';
 
 /**
  * for this page
@@ -28,7 +30,8 @@ class Layout extends React.PureComponent {
                 <Header />
 
                 {/* <Content /> */}
-
+                <Step />
+                <ChooseList />
                 <Footer />
                 <BottomAffix />
             </Fragment>

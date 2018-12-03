@@ -5,7 +5,7 @@ import { rel } from '@ifeng/ui_rel';
 import UserInfo from '../userInfo/';
 import logo from './images/logo.png';
 
-import { getAccountStatus } from '../../utils';
+// import { getAccountStatus } from '../../utils';
 
 /**
  * 定义 Header 组件
@@ -15,9 +15,9 @@ class Header extends React.PureComponent {
      * 渲染组件
      */
 
-    componentDidMount() {
-        getAccountStatus();
-    }
+    // componentDidMount() {
+    //     getAccountStatus();
+    // }
 
     render() {
         return (
