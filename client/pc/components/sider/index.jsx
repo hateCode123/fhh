@@ -11,6 +11,7 @@ import { getAccountPrivilegeListOpened } from '../../utils';
 class Sider extends React.PureComponent {
     static propTypes = {
         privilegeList: PropTypes.object,
+        account: PropTypes.object,
     };
     static defaultProps = {
         isEnd: false,
@@ -23,10 +24,87 @@ class Sider extends React.PureComponent {
         getAccountPrivilegeListOpened();
     }
 
+    isTiyanqiTips = () => {
+        console.log('体验期账号无法使用');
+    };
+
     render() {
-        const { privilegeList } = this.props;
+        const { privilegeList, account } = this.props;
+
+        const isTiyanqi = account && account.isTiyanqi;
+
+        const earningsDom = isTiyanqi ? (
+            <li>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    收益&amp;结算
+                </a>
+            </li>
+        ) : (
+            <li>
+                <a href="#" target="_blank" rel={rel} title="">
+                    收益&amp;结算
+                </a>
+            </li>
+        );
+
+        const publishAlbumDom = isTiyanqi ? (
+            <li>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    发布图集
+                </a>
+            </li>
+        ) : (
+            <li>
+                <a href="javascript:;" target="_blank" rel={rel} title="">
+                    发布图集
+                </a>
+            </li>
+        );
+
+        const videoManageDom = isTiyanqi ? (
+            <li>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    视频管理
+                </a>
+            </li>
+        ) : (
+            <li>
+                <a href="#" target="_blank" rel={rel} title="">
+                    视频管理
+                </a>
+            </li>
+        );
+
+        const publishVideoDom = isTiyanqi ? (
+            <li>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    发布视频
+                </a>
+            </li>
+        ) : (
+            <li>
+                <a href="javascript:;" target="_blank" rel={rel} title="">
+                    发布视频
+                </a>
+            </li>
+        );
+
+        const videoStatDom = isTiyanqi ? (
+            <li>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    视频数据
+                </a>
+            </li>
+        ) : (
+            <li>
+                <a href="#" target="_blank" rel={rel} title="">
+                    视频数据
+                </a>
+            </li>
+        );
 
         console.log('privilegeList', privilegeList);
+        console.log('account', account);
 
         // original(pin): true
         // originalProtection(pin): true
@@ -96,11 +174,7 @@ class Sider extends React.PureComponent {
                             </span>
                         </li> */}
 
-                        <li>
-                            <a href="#" target="_blank" rel={rel} title="">
-                                收益&amp;结算
-                            </a>
-                        </li>
+                        {earningsDom}
                     </ul>
                 </div>
                 <div className={style.list_index}>
@@ -116,11 +190,8 @@ class Sider extends React.PureComponent {
                                 发布文章
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:;" target="_blank" rel={rel} title="" className={style.img_j}>
-                                发布图集
-                            </a>
-                        </li>
+                        {publishAlbumDom}
+
                         <li>
                             <a href="#" target="_blank" rel={rel} title="">
                                 图文数据
@@ -132,21 +203,9 @@ class Sider extends React.PureComponent {
                 <div className={style.list_index}>
                     <p className={style.list_video_tit}>凤凰视频</p>
                     <ul>
-                        <li>
-                            <a href="#" target="_blank" rel={rel} title="">
-                                视频管理
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" target="_blank" rel={rel} title="" className={style.img_j}>
-                                发布视频
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank" rel={rel} title="">
-                                视频数据
-                            </a>
-                        </li>
+                        {videoManageDom}
+                        {publishVideoDom}
+                        {videoStatDom}
                     </ul>
                 </div>
                 <div className={style.list_index}>
@@ -160,6 +219,7 @@ class Sider extends React.PureComponent {
 // export default Container;
 const mapStateToProps = state => ({
     privilegeList: state.user.privilegeList,
+    account: state.user.accountInfo,
 });
 
 const mapDispatchToProps = dispatch => ({});

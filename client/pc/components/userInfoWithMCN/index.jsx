@@ -30,11 +30,58 @@ class UserInfoWidthMCN extends React.PureComponent {
         auth.logout();
     };
 
+    isTiyanqiTips = () => {
+        console.log('体验期账号无法使用');
+    };
+
     /**
      * 渲染组件
      */
     render() {
         const { user, account } = this.props;
+        const isTiyanqi = account && account.isTiyanqi;
+
+        const accountInfoDom = isTiyanqi ? (
+            <li className={style.zh}>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    账号信息
+                </a>
+            </li>
+        ) : (
+            <li className={style.zh}>
+                <a href="#" target="_blank" title="">
+                    账号信息
+                </a>
+            </li>
+        );
+
+        const contentSynchDom = isTiyanqi ? (
+            <li className={style.nr}>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    内容同步
+                </a>
+            </li>
+        ) : (
+            <li className={style.nr}>
+                <a href="#" target="_blank" title="">
+                    内容同步
+                </a>
+            </li>
+        );
+
+        const privilegeManageDom = isTiyanqi ? (
+            <li className={style.tq}>
+                <a href="javascript:;" onClick={this.isTiyanqiTips} title="体验期账号无法使用该功能">
+                    特权管理
+                </a>
+            </li>
+        ) : (
+            <li className={style.tq}>
+                <a href="#" target="_blank" title="">
+                    特权管理
+                </a>
+            </li>
+        );
 
         const infoDom = (
             <div className={style.about}>
@@ -82,21 +129,9 @@ class UserInfoWidthMCN extends React.PureComponent {
         const hiddenDom = (
             <div className={style.xl}>
                 <ul>
-                    <li className={style.zh}>
-                        <a href="#" target="_blank" title="">
-                            账号信息
-                        </a>
-                    </li>
-                    <li className={style.nr}>
-                        <a href="#" target="_blank" title="">
-                            内容同步
-                        </a>
-                    </li>
-                    <li className={style.tq}>
-                        <a href="#" target="_blank" title="">
-                            特权管理
-                        </a>
-                    </li>
+                    {accountInfoDom}
+                    {contentSynchDom}
+                    {privilegeManageDom}
                     <li className={style.tc}>
                         <a href="javascript:;" title="点击退出登录" onClick={this.handleLoginOut}>
                             退出登录
@@ -106,7 +141,6 @@ class UserInfoWidthMCN extends React.PureComponent {
                 <div className={style.d_f}>
                     {account.isHonor ? honorEntrence : null}
                     {account.isMcnManager ? mcnEntrence : null}
-
                     {/* @todo mcn成员 这里的如何显示 */}
                 </div>
             </div>

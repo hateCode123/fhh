@@ -29,8 +29,8 @@ class Header extends React.PureComponent {
                             <img src={logo} width="120" height="36" />
                         </a>
                     </div>
-                    <UserInfo />
-                    {/* <UserInfoWidthMCN /> */}
+                    {/* <UserInfo /> */}
+                    <UserInfoWidthMCN />
                 </div>
             </div>
         );

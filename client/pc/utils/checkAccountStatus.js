@@ -71,7 +71,7 @@ export const queryinfoHandler = sourceData => {
 
         if (isTiyanqi) {
             result.code = 0;
-
+            result.isTiyanqi = true;
             switch (status) {
                 case 1:
                     result.message = '体验期账号审核中';

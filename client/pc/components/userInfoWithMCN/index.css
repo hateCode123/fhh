@@ -146,12 +146,12 @@
     display: inline-block;
 }
 
-.d_f {
+.xl .d_f {
     background: #f6f6f6;
     padding: 12px 0;
 }
 
-.dafeng {
+.xl .dafeng {
     /* background: url(./images/icon1.png) no-repeat -2px -172px; */
     margin-bottom: 10px;
 
