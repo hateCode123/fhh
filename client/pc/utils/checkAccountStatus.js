@@ -26,12 +26,31 @@ export const setUserInfoStore = async data => {
 /**
  * @func 根据接口数据，返回账号状态
  * @param {*} sourceData
- * @desc 1、空对象：账号未注册 2、判断上下线 3、账号类型 4、审核状态
+ * @desc  该函数的判断顺序：1、空对象：账号未注册 2、判断上下线 3、账号类型 4、审核状态
+ * 
  * online 上下线状态  （0:默认 1：下线，2：上线）
+ * 
  * accountType 账号类型（1：凤凰账号，2：签约账号，3：视频账号，4：一点账号 , 5: UGC账号 ，6:  体验账号,）
  * status 审核状态（1：待审核 ，2：审核通过，,3：审核未通过,4:永久审核不通过）
+ * 
  * isMcnManager 是否是mcn管理员  2：mcn管理员；1:mcn成员；0：普通账号
  * honorName 荣誉体系名称  没有荣誉体系的 该字段返回空
+ * 
+ * 接口最终给出的账号状态所需三个字段之间关系，判断逻辑：
+status：账号状态（1：待审核 ，2：审核通过，,3：审核未通过,4:永久审核不通过）
+accountType：账号类型（1：凤凰账号，2：签约账号，3：视频账号，4：一点账号 , 5: UGC账号 ，6:  体验账号,）
+isExperience：是否是体验期账号，（1：体验账号，null：非体验账号）
+
+体验期账号：accountType=6，status=2，isExperience=1, 体验期未提交正式申请状态，这时默认给的status是2
+体验期账号申请转正审核中：accountType=1，status=1，isExperience=1
+体验期账号申请转正审核通过：accountType=1，status=2，isExperience=1
+体验期账号申请转正审核不通过：accountType=6，status=3，isExperience=1
+体验期账号申请转正审核永久不通过：accountType=6，status=4，isExperience=1
+普通账号审核中：accountType=1，status=1，isExperience=null
+普通账号审核通过：accountType=1，status=2，isExperience=null
+普通账号审核不通过：accountType=1，status=3，isExperience=null
+普通账号审核永久不通过：accountType=1，status=4，isExperience=null
+
  */
 
 export const queryinfoHandler = sourceData => {
@@ -50,7 +69,14 @@ export const queryinfoHandler = sourceData => {
     }
 
     const isOffline = sourceData.online && sourceData.online === 1;
-    const isTiyanqi = sourceData.accountType && sourceData.accountType === '6';
+
+    const isTiyanqi =
+        (sourceData.accountType && parseInt(sourceData.accountType, 10) === 6) ||
+        (sourceData.status &&
+            parseInt(sourceData.status, 10) === 1 &&
+            sourceData.isExperience &&
+            parseInt(sourceData.isExperience, 10) === 1);
+
     const status = parseInt(sourceData.status || 2, 10);
 
     if (isOffline) {
@@ -78,7 +104,7 @@ export const queryinfoHandler = sourceData => {
                     result.status = 1;
                     break;
                 case 2:
-                    result.message = '体验期账号审核通过';
+                    result.message = '体验期账号未提交正式申请';
                     result.status = 2;
                     break;
                 case 3:
@@ -91,12 +117,13 @@ export const queryinfoHandler = sourceData => {
             switch (status) {
                 case 1:
                     result.code = 1003;
-                    result.message = '非体验期账号审核中';
+                    result.message = '非体验期账号正式申请审核中';
                     result.status = 4;
+
                     break;
                 case 2:
                     result.code = 0;
-                    result.message = '非体验期账号审核通过';
+                    result.message = '(非)体验期账号审核通过';
                     result.status = 5;
                     break;
                 case 3:

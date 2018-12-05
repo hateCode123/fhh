@@ -66,10 +66,12 @@
 
 .ts_index {
     position: absolute;
-    bottom: -236px;
+    /* bottom: -236px; */
     width: 300px;
-    left: 50%;
-    margin-left: -154.5px;
+    top: 20px;
+    right: -150px;
+    /* left: 50%;
+    margin-left: -154.5px; */
 
     line-height: 30px;
     padding: 0 9px;
@@ -84,12 +86,13 @@
 .sj_d {
     background: url(./images/sj_img01.png) no-repeat;
     top: 16px;
-    margin-left: 16px;
+    right: 0;
+    /* margin-left: 16px; */
     width: 12px;
     height: 6px;
     position: absolute;
     bottom: 20px;
-    left: 50%;
+    /* left: 50%; */
 
     display: none;
 }

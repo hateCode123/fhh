@@ -12,14 +12,13 @@ export * from './reduxUtil';
 export { default as request } from './request';
 export * from './requestResponseHandler';
 
-export * from './cookies';
-
 /**
  * @func 获取自媒体用户信息及相应处理
  */
-export * from './getAccountStatus';
+export * from './initGetHeaderData';
 export * from './checkAccountStatus';
 export * from './accountStatusHandler';
+export * from './getNoReadCountHandler';
 
 /**
  * @func 获取自媒体用户权限及相应处理

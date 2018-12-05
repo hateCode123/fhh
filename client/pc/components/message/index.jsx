@@ -4,7 +4,6 @@ import errorBoundary from '@ifeng/errorBoundary';
 import { rel } from '@ifeng/ui_rel';
 
 import { connect } from 'react-redux';
-
 import PropTypes from 'prop-types';
 
 import imageXin from './images/xin.png';
@@ -16,6 +15,7 @@ class Message extends React.PureComponent {
     static propTypes = {
         messageNum: PropTypes.number,
     };
+
     /**
      * 渲染组件
      */

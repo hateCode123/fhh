@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import style from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
+import Guide from '../guide';
 
 /**
  * 定义 Footer 组件
@@ -17,7 +18,12 @@ class Footer extends React.PureComponent {
             </div>
         );
 
-        return footderDom;
+        return (
+            <Fragment>
+                {footderDom}
+                <Guide />
+            </Fragment>
+        );
     }
 }
 

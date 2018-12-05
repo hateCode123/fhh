@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import errorBoundary from '@ifeng/errorBoundary';
-import { rel } from '@ifeng/ui_rel';
 import auth from '@ifeng/ui_pc_auth';
 import Message from '../message';
 import TiyanqiIcon from '../tiyanqiIcon';
 import style from './index.css';
-import imageXin from './images/xin.png';
 /**
  * 定义 Header 组件
  */
@@ -91,22 +89,40 @@ class UserInfoWidthMCN extends React.PureComponent {
                 </div>
                 <div className={style.head_name}>{user.weMediaName}</div>
                 <div className={style.vip}>
-                    <b>LV.{user.accountLevel}</b>
-                    <span>
-                        <img width="100%" height="100%" src={user.honorImg} />
-                    </span>
-                    <i />
-                </div>
-            </div>
-        );
+                    {/* 体验期审核不通过 */}
+                    {account.status === 3 ? (
+                        <p>
+                            <a href="zsrz_sq.html" target="_blank" title="" className={style.linka}>
+                                修改申请资料
+                            </a>
+                        </p>
+                    ) : null}
 
-        // @todo 这个拿出去单独做一个组件
-        const msgDom = (
-            <div className={style.xf}>
-                <span className={style.xfSpan}>
-                    <img src={imageXin} />
-                </span>
-                <p />
+                    {account.status === 1 ? (
+                        <p>
+                            <span className={style.linka}>正式申请审核中</span>
+                        </p>
+                    ) : null}
+
+                    {/* 体验期未提交正式申请 */}
+                    {account.status === 2 ? (
+                        <p>
+                            <a href="zsrz_sq.html" target="_blank" title="" className={style.linka}>
+                                申请正式入驻
+                            </a>
+                        </p>
+                    ) : null}
+
+                    {!isTiyanqi ? <b>LV.{user.accountLevel}</b> : null}
+
+                    {account.isHonor ? (
+                        <span className={style.spanIcon}>
+                            <img width="100%" height="100%" src={user.honorImg} />
+                        </span>
+                    ) : null}
+
+                    {account.isMcnManager ? <i /> : null}
+                </div>
             </div>
         );
 
@@ -155,8 +171,6 @@ class UserInfoWidthMCN extends React.PureComponent {
                 </div>
                 <Message />
                 {isTiyanqi ? <TiyanqiIcon /> : null}
-
-                {/* {msgDom} */}
             </Fragment>
         );
     }
