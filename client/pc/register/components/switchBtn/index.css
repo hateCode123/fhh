@@ -1,0 +1,72 @@
+.qh {
+    background: #f6f6f6;
+    border-radius: 4px;
+    border: solid 1px #e5e5e5;
+    float: right;
+    background: url(./qh.png) no-repeat left center;
+    height: 34px;
+    line-height: 34px;
+    padding-left: 34px;
+    padding-right: 10px;
+}
+.qh a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #666666;
+}
+.wen {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+    margin-top: 3px;
+    cursor: pointer;
+    position: relative;
+    background: url(./wen.png) no-repeat;
+    &:hover .tip {
+        width: 300px;
+        left: 50%;
+        margin-left: -154.5px;
+        display: block;
+        position: absolute;
+        line-height: 30px;
+        padding: 0 9px;
+        background: #2b2b2b;
+        background: rgba(0, 0, 0, 0.75);
+        top: 26px;
+        border-radius: 4px;
+        color: #ffffff;
+        font-size: 13px;
+        font-style: none;
+    }
+}
+.tip {
+    width: 300px;
+    left: 50%;
+    margin-left: -154.5px;
+    display: none;
+    position: absolute;
+    line-height: 30px;
+    padding: 0 9px;
+    background: #2b2b2b;
+    background: rgba(0, 0, 0, 0.75);
+    top: 26px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 13px;
+    font-style: none;
+}
+.tit {
+    font-size: 20px;
+    width: 280px;
+    margin: 5px auto;
+    display: block;
+    padding-top: 5px;
+    font-style: normal;
+}
+.tit_txt {
+    display: block;
+    width: 280px;
+    margin: 0px auto 10px;
+    font-style: normal;
+}

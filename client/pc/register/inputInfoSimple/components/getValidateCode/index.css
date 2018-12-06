@@ -1,0 +1,16 @@
+.btn {
+    margin-left: 9px;
+    float: right;
+    width: 140px;
+    height: 36px;
+    border: solid 1px #e5e5e5;
+    background: #f6f6f6;
+    line-height: 36px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 1px;
+    margin-right: 6px;
+}
