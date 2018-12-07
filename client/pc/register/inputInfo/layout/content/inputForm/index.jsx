@@ -12,6 +12,7 @@ import { trimSpaceBE } from '../../../../utils/paramsUtil';
  * for this page
  */
 import FormTitle from '../../../../components/formTitle';
+import Crooper from '../../../../components/cropper';
 
 import Form from 'antd/lib/form';
 import 'antd/lib/form/style/index.css';
@@ -33,7 +34,7 @@ class Content extends React.PureComponent {
         btnDisable: false,
         subBtnDisable: false,
     };
-    // 校验用户名关键字
+
     handleKeywords = async (rule, value, callback) => {
         const { getFieldValue } = this.props.form;
 
@@ -49,7 +50,6 @@ class Content extends React.PureComponent {
             }
         }
     };
-    // 校验手机号
     handlePhoneNum = async (rule, value, callback) => {
         const { getFieldValue } = this.props.form;
 
@@ -72,14 +72,12 @@ class Content extends React.PureComponent {
 
         return res;
     };
-    // 点击获取验证码按钮
     clickGetCodeBtn = () => {
         const { validateFields, setFields } = this.props.form;
 
         if (this.state.btnDisable) {
             return true;
         }
-        // 同时验证手机号
         validateFields(['operatorTelephone'], (errors, values, callback) => {
             if (!errors) {
                 this.props.updateUiStatus({ isCountdown: true });
@@ -128,6 +126,7 @@ class Content extends React.PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {
             const value = trimSpaceBE(fieldsValue);
+
             console.log(value);
             if (!fieldsValue.agree) {
                 return;
@@ -165,7 +164,6 @@ class Content extends React.PureComponent {
                 },
             ],
         };
-        // 大风号名称
         const weMediaName = (
             <FormItem
                 label={
@@ -186,7 +184,25 @@ class Content extends React.PureComponent {
                 )}
             </FormItem>
         );
-        // 绑定手机号/验证码
+        const weMediaImg = (
+            <FormItem
+                label={
+                    <span required={true} className={style.label}>
+                        大风号头像
+                    </span>
+                }
+                colon={false}
+                style={{ marginTop: '20px', marginRight: '0px' }}>
+                {getFieldDecorator('weMediaImg', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请上传头像',
+                        },
+                    ],
+                })(<Crooper />)}
+            </FormItem>
+        );
         const operatorTelephone = (
             <Fragment>
                 <div className={style.inputBox}>
@@ -258,22 +274,10 @@ class Content extends React.PureComponent {
                             <img src={geren} />个人自媒体{' '}
                         </div>
                     </div>
-                    {/* 头像 */}
-                    <div className={`${style.df_tx} clearfix`}>
-                        <span>大风号头像</span>
-                        <div className={style.big_tx}>
-                            <img src={touXiang} />
-                            <p>
-                                极速入驻后的体验期，个人头像均为随机头像。<br />
-                                正式入驻后，用户可修改头像。
-                            </p>
-                        </div>
-                    </div>
                     <Form layout="inline">
                         <div className={style.inputBox}>{weMediaName}</div>
+                        {weMediaImg}
                         {operatorTelephone}
-                        {/* <GetValidateCode onClick={this.clickGetCodeBtn.bind(this)} /> */}
-                        {/* <div className={style.btn}>获取验证码</div> */}
                         <button ref={'btn'} className={style.btn} onClick={this.clickGetCodeBtn.bind(this)}>
                             {this.state.text}
                         </button>
@@ -297,7 +301,7 @@ class Content extends React.PureComponent {
     }
 }
 const mapStateToProps = state => ({
-    uiStatus: state.inputInfoSimple.uiStatus,
+    uiStatus: state.inputInfo.uiStatus,
 });
 
 const mapDispatchToProps = dispatch => ({

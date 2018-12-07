@@ -82,7 +82,7 @@ class TipsModal extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-    uiStatus: state.inputInfoSimple.uiStatus,
+    uiStatus: state.inputInfo.uiStatus,
 });
 
 const mapDispatchToProps = dispatch => ({
