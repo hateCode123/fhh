@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import style from './index.css';
 import { connect } from 'react-redux';
 import errorBoundary from '@ifeng/errorBoundary';
-import img from './011.jpg';
+// import img from './011.jpg';
 
 /**
  * for this page
@@ -13,30 +13,33 @@ import 'cropperjs/dist/cropper.css';
 
 class cropperModal extends React.PureComponent {
     state = {
-        selectedImageFile: img,
+        selectedImageFile: '',
+        src: '',
         editImageModalVisible: false,
     };
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
+        // console.log(nextProps);
         if (nextProps !== this.props) {
             this.setState({
+                selectedImageFile: nextProps.file,
                 editImageModalVisible: nextProps.isShow,
             });
         }
     }
 
-    componentDidMount() {
-        console.log(this.refs);
-    }
+    // componentDidMount() {
+    //     console.log(this.refs);
+    // }
 
     componentWillMount() {
         // console.log(this.props)
-        const { file } = this.props;
-        const fileReader = new FileReader();
-        fileReader.onload = e => {
-            // const dataUrl =
-        };
+        const { file, src } = this.props;
+
+        this.setState({
+            selectedImageFile: file,
+            src,
+        });
     }
 
     handleClose = e => {
@@ -46,22 +49,38 @@ class cropperModal extends React.PureComponent {
         // console.log(this.refs.cropper.getCropBoxData());
         this.props.handleClose();
     };
-    handleSubmmit = e => {};
+    handleSubmmit = e => {
+        // console.log(this.state.selectedImageFile);
+        const { name } = this.state.selectedImageFile;
+
+        // console.log(this.refs.cropper.getCroppedCanvas().toDataURL());
+        const src = this.refs.cropper
+            .getCroppedCanvas({
+                width: 122,
+                height: 122,
+                imageSmoothingQuality: 'high',
+            })
+            .toDataURL();
+
+        const { preview } = this.props;
+
+        preview(src);
+        this.props.handleClose();
+    };
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
 
         /**
          * 组件分发数据
          */
-
         return (
             <Fragment>
                 <div className={style.mask}>
                     <div className={style.modal}>
                         <div className={style.clipArea}>
                             <Cropper
-                                src={this.state.selectedImageFile}
+                                src={this.state.src}
                                 // className="company-logo-cropper"
                                 style={{ height: 480, width: '100%' }}
                                 ref={'cropper'}

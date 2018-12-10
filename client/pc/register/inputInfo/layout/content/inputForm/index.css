@@ -123,9 +123,28 @@
     color: #666666;
     height: 40px;
 }
-.inputBox {
+.inputBox_weMediaName {
     height: 62px;
     margin-top: 30px;
+}
+.inputBox_mt20 {
+    height: 62px;
+    margin-top: 20px;
+}
+.inputBox_mt10 {
+    height: 62px;
+    margin-top: 10px;
+}
+
+.touxiangBox {
+    height: 144px;
+}
+.zhnegjianBox {
+    height: 160px;
+}
+.textAeraBox {
+    height: 128px;
+    /* margin-top: 30px; */
 }
 .required {
     display: inline-block;
@@ -147,4 +166,11 @@
     & .ant-checkbox-inner {
         background-color: #e5e5e5 !important;
     }
+}
+.yy_info {
+    font-size: 20px;
+    color: #f54343;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin: 20px 0;
 }

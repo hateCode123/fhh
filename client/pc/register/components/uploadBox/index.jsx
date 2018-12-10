@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import style from './index.css';
 import { connect } from 'react-redux';
 import errorBoundary from '@ifeng/errorBoundary';
-import localimg from './011.jpg';
+import epimg from './tx_ys.png';
 
 /**
  * for this page
@@ -12,7 +12,7 @@ import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import CropperModal from '../cropperModal';
 
-class MyCropper extends React.PureComponent {
+class UplodBox extends React.PureComponent {
     state = {
         selectedImageFile: '',
         src: '',
@@ -57,24 +57,7 @@ class MyCropper extends React.PureComponent {
         e.target.value = '';
     };
 
-    handleClose = e => {
-        this.setState({
-            selectedImageFile: '',
-            editImageModalVisible: false,
-        });
-    };
-
-    preview = src => {
-        // console.log(src)
-        this.refs.cropperWrap.style.backgroundImage = `url(${src})`;
-        const { onChange } = this.props;
-
-        if (onChange) {
-            const formValue = localimg;
-
-            onChange(formValue);
-        }
-    };
+    preview = src => {};
 
     render() {
         console.log(this.props);
@@ -86,35 +69,21 @@ class MyCropper extends React.PureComponent {
         return (
             <Fragment>
                 <div className={`${style.big_tx} clearfix`}>
-                    <div className={style.cropper}>
-                        <div ref="cropperWrap" className={style.cropperWrap} />
-                        <input
-                            type="file"
-                            className={style.upload}
-                            accept="image/jpeg,image/jpg,image/png"
-                            onChange={this.handleFileChange}
-                            title="选择文件"
-                        />
-                        {/* <div className={style.view}></div> */}
+                    <div className={style.uploadWrap}>
+                        <div className={style.uploadContainer}>
+                            <input type="file" />
+                        </div>
                     </div>
-                    <p className="tx_p">
-                        要求清晰、健康、代表品牌形象<br />
-                        请勿使用二维码，大小不超过 5M
+                    <p className={style.yy_img}>
+                        <i className={style.tx_ys}>
+                            <img src={epimg} />{' '}
+                        </i>
+                        请按参考示例进行拍摄，要求身份证号码、照片清晰可见， 大小不超过 5M
                     </p>
                 </div>
-                {/* 遮罩层 */}
-                {this.state.editImageModalVisible ? (
-                    <CropperModal
-                        isShow={this.state.editImageModalVisible}
-                        file={this.state.selectedImageFile}
-                        src={this.state.src}
-                        handleClose={this.handleClose}
-                        preview={this.preview.bind(this)}
-                    />
-                ) : null}
             </Fragment>
         );
     }
 }
 
-export default errorBoundary(MyCropper);
+export default errorBoundary(UplodBox);

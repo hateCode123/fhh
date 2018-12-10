@@ -1,0 +1,42 @@
+.big_tx {
+    width: 550px;
+}
+.uploadWrap {
+    margin-bottom: 0.77rem;
+    padding: 0px;
+    text-align: center;
+    border-radius: 4px;
+    background: #ffffff;
+    height: 3.05rem;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    float: left;
+    border: solid 1px #e5e5e5;
+}
+.uploadContainer {
+    height: 100%;
+    background: #f6f6f6 url(./jiahao.png) no-repeat center center;
+    & input {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}
+.yy_img {
+    float: left;
+    width: 360px;
+    margin-left: 20px;
+    line-height: 24px;
+    font-size: 14px;
+    color: #999;
+}
+.tx_ys img {
+    width: auto;
+    height: auto;
+    border-radius: initial;
+    margin: inherit;
+    float: none;
+    margin-bottom: 5px;
+    display: block;
+}

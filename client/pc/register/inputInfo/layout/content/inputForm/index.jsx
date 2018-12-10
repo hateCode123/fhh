@@ -13,6 +13,7 @@ import { trimSpaceBE } from '../../../../utils/paramsUtil';
  */
 import FormTitle from '../../../../components/formTitle';
 import Crooper from '../../../../components/cropper';
+import UplodBox from '../../../../components/uploadBox';
 
 import Form from 'antd/lib/form';
 import 'antd/lib/form/style/index.css';
@@ -20,7 +21,11 @@ import Input from 'antd/lib/input';
 import 'antd/lib/input/style/index.css';
 import CheckBox from 'antd/lib/checkbox';
 import 'antd/lib/checkbox/style/index.css';
+import Select from 'antd/lib/select';
+import 'antd/lib/select/style/index.css';
 const FormItem = Form.Item;
+const Option = Select.Option;
+const { TextArea } = Input;
 
 class Content extends React.PureComponent {
     static propTypes = {
@@ -34,7 +39,7 @@ class Content extends React.PureComponent {
         btnDisable: false,
         subBtnDisable: false,
     };
-
+    // 校验关键字
     handleKeywords = async (rule, value, callback) => {
         const { getFieldValue } = this.props.form;
 
@@ -50,6 +55,7 @@ class Content extends React.PureComponent {
             }
         }
     };
+    // 校验手机号
     handlePhoneNum = async (rule, value, callback) => {
         const { getFieldValue } = this.props.form;
 
@@ -164,13 +170,10 @@ class Content extends React.PureComponent {
                 },
             ],
         };
+        // 大风号名
         const weMediaName = (
             <FormItem
-                label={
-                    <span required={true} className={style.label}>
-                        大风号名称
-                    </span>
-                }
+                label={<span className={style.label}>大风号名称</span>}
                 colon={false}
                 style={{ marginRight: '0px' }}>
                 {getFieldDecorator('weMediaName', { ...formItemConfig, validateTrigger: 'onBlur' })(
@@ -184,13 +187,10 @@ class Content extends React.PureComponent {
                 )}
             </FormItem>
         );
+        // 大风号头像
         const weMediaImg = (
             <FormItem
-                label={
-                    <span required={true} className={style.label}>
-                        大风号头像
-                    </span>
-                }
+                label={<span className={style.label}>大风号头像</span>}
                 colon={false}
                 style={{ marginTop: '20px', marginRight: '0px' }}>
                 {getFieldDecorator('weMediaImg', {
@@ -203,16 +203,141 @@ class Content extends React.PureComponent {
                 })(<Crooper />)}
             </FormItem>
         );
+        // 专注领域
+        const categoryIdOptionData = [
+            { label: '测试1', value: 1 },
+            { label: '测试2', value: 2 },
+            { label: '测试3', value: 3 },
+        ];
+        const categoryIdOption = categoryIdOptionData.map(item => {
+            return (
+                <Option value={item.value} key={item.value}>
+                    {item.label}
+                </Option>
+            );
+        });
+        const categoryId = (
+            <FormItem
+                label={<span className={style.label}>大风号头像</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('categoryId', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请选择专注领域',
+                        },
+                    ],
+                })(
+                    <Select
+                        style={{
+                            width: '548px',
+                            height: '40px',
+                        }}
+                        placeholder={'请选择'}>
+                        {categoryIdOption}
+                    </Select>,
+                )}
+            </FormItem>
+        );
+        // 简介
+        const weMediaDescription = (
+            <FormItem
+                label={<span className={style.label}>大风号简介</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('weMediaDescription', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请输入大风号简介',
+                        },
+                    ],
+                    validateTrigger: 'onBlur',
+                })(
+                    <TextArea
+                        style={{
+                            width: '548px',
+                            height: '100px',
+                        }}
+                        placeholder="10-30 个汉字，请简要地介绍您的大风号，请勿添加任何联系方式！"
+                    />,
+                )}
+            </FormItem>
+        );
+        // 姓名
+        const operatorName = (
+            <FormItem
+                label={<span className={style.label}>运营者姓名</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('operatorName', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请输入运营者姓名',
+                        },
+                    ],
+                    validateTrigger: 'onBlur',
+                })(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
+                        placeholder="请输入姓名"
+                    />,
+                )}
+            </FormItem>
+        );
+        // 有效证件号
+        const idCard = (
+            <FormItem
+                label={<span className={style.label}>有效证件号</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('idCard', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请输入有效证件号',
+                        },
+                    ],
+                    validateTrigger: 'onBlur',
+                })(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
+                        placeholder="身份证号或护照"
+                    />,
+                )}
+            </FormItem>
+        );
+        // 运营者身份证照片
+        const idCardImg = (
+            <FormItem
+                label={<span className={style.label}>运营者身份证照片</span>}
+                colon={false}
+                style={{ marginTop: '20px', marginRight: '0px' }}>
+                {getFieldDecorator('idCardImg', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请上传有效证件照片',
+                        },
+                    ],
+                })(<UplodBox />)}
+            </FormItem>
+        );
+        // 手机号相关
         const operatorTelephone = (
             <Fragment>
-                <div className={style.inputBox}>
+                <div className={style.inputBox_mt20}>
                     {/* <div className={style.required} /> */}
                     <FormItem
-                        label={
-                            <span required={true} className={style.label}>
-                                绑定手机号
-                            </span>
-                        }
+                        label={<span className={style.label}>绑定手机号</span>}
                         colon={false}
                         style={{ marginRight: '0px' }}>
                         {getFieldDecorator('operatorTelephone', {
@@ -241,10 +366,7 @@ class Content extends React.PureComponent {
                         )}
                     </FormItem>
                 </div>
-                <FormItem
-                    label={<span required={true} className={style.label} />}
-                    colon={false}
-                    style={{ marginRight: '0px' }}>
+                <FormItem label={<span className={style.label} />} colon={false} style={{ marginRight: '0px' }}>
                     {getFieldDecorator('validateCode', {
                         // rules: [{}],
                         validateTrigger: 'onBlur',
@@ -275,8 +397,25 @@ class Content extends React.PureComponent {
                         </div>
                     </div>
                     <Form layout="inline">
-                        <div className={style.inputBox}>{weMediaName}</div>
-                        {weMediaImg}
+                        {/* 大风号名 */}
+                        <div className={style.inputBox_weMediaName}>{weMediaName}</div>
+                        {/* 头像 */}
+                        <div className={style.touxiangBox}>{weMediaImg}</div>
+
+                        {/* 专注领域 */}
+                        <div className={style.inputBox_mt20}>{categoryId}</div>
+                        {/* 简介 */}
+                        <div className={style.textAeraBox}>{weMediaDescription}</div>
+
+                        {/* 运营者信息 */}
+                        <h3 className={style.yy_info}>运营者信息</h3>
+                        {/* 姓名 */}
+                        <div className={style.inputBox_mt10}>{operatorName}</div>
+                        {/* 有效证件 */}
+                        <div className={style.inputBox_mt10}>{idCard}</div>
+                        {/* 证件图片 */}
+                        <div className={style.zhnegjianBox}>{idCardImg}</div>
+
                         {operatorTelephone}
                         <button ref={'btn'} className={style.btn} onClick={this.clickGetCodeBtn.bind(this)}>
                             {this.state.text}
