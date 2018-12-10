@@ -10,6 +10,7 @@ import img from './011.jpg';
  */
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import CropperModal from '../cropperModal';
 
 class MyCropper extends React.PureComponent {
     state = {
@@ -20,7 +21,7 @@ class MyCropper extends React.PureComponent {
     handleFileChange = e => {
         const file = e.target.files[0];
 
-        console.log(e.target.files);
+        console.log(e.target);
 
         console.log(file);
 
@@ -49,6 +50,7 @@ class MyCropper extends React.PureComponent {
 
     handleClose = e => {
         this.setState({
+            selectedImageFile: '',
             editImageModalVisible: false,
         });
     };
@@ -59,36 +61,6 @@ class MyCropper extends React.PureComponent {
         /**
          * 组件分发数据
          */
-        const modal = (
-            <div className={style.mask}>
-                <div className={style.modal}>
-                    <div className={style.clipArea}>
-                        <Cropper
-                            src={this.state.selectedImageFile}
-                            // className="company-logo-cropper"
-                            style={{ height: 480, width: '100%' }}
-                            ref={cropper => (this.cropper = cropper)}
-                            // Cropper.js options
-                            // zoomable={true}
-                            aspectRatio={1}
-                            guides={false}
-                            viewMode={1}
-                            dragMode={'move'}
-                            cropBoxMovable={false}
-                            cropBoxResizable={false}
-                            // movable={true}
-                        />
-                    </div>
-                    <div className={style.btnWrap}>
-                        <button className={style.clipBtn}>保存封面</button>
-                        <div className={style.close_upload} id="close_upload" onClick={this.handleClose.bind(this)}>
-                            取消
-                        </div>
-                        <div className={style.touch_ts}>滑动滚轮可进行缩放</div>
-                    </div>
-                </div>
-            </div>
-        );
 
         return (
             <Fragment>
@@ -109,7 +81,14 @@ class MyCropper extends React.PureComponent {
                     </p>
                 </div>
                 {/* 遮罩层 */}
-                {this.state.editImageModalVisible ? modal : null}
+                {this.state.editImageModalVisible ? (
+                    <CropperModal
+                        isShow={this.state.editImageModalVisible}
+                        file={this.state.selectedImageFile}
+                        img={this.state.selectedImageFile}
+                        handleClose={this.handleClose}
+                    />
+                ) : null}
             </Fragment>
         );
     }
