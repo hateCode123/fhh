@@ -18,6 +18,7 @@ if (isLogin) {
             <Layout />
         </Provider>,
         document.getElementById('root'),
+        // document.getElementsByTagName('body')[0],
     );
 } else {
     window.location.href = `/login?url=${window.location.href}`;
