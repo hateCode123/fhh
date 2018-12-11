@@ -128,7 +128,6 @@ class Content extends React.PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {
             const value = trimSpaceBE(fieldsValue);
-
             console.log(value);
             if (!fieldsValue.agree) {
                 return;
