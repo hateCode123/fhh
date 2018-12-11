@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import ToThousands from '../utils/utils';
 import ExportJsonExcel from 'js-export-excel';
 import style from './tableList.css';
@@ -9,7 +10,7 @@ class TableList extends React.PureComponent {
     }
 
     static propTypes = {
-        TabledateJson: this.props,
+        TabledateJson: PropTypes.array,
     };
 
     ExcelJson = () => {

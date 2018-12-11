@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 {
     /* 引入 ECharts 主模块*/
 }
@@ -25,7 +26,7 @@ class TabData extends React.PureComponent {
     }
 
     static propTypes = {
-        echartsData: this.props,
+        echartsData: PropTypes.array,
     };
 
     componentDidMount() {
@@ -101,6 +102,7 @@ class TabData extends React.PureComponent {
                     <div onClick={() => this.setData(0)} className={this.check_title_index(0)}>
                         昨天
                     </div>
+
                     <div onClick={() => this.setData(1)} className={this.check_title_index(1)}>
                         7天
                     </div>

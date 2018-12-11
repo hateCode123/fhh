@@ -1,16 +1,18 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import ToThousands from '../utils/utils';
 import style from './dataList.css';
 
 class DataList extends React.PureComponent {
+    static propTypes = {
+        item: PropTypes.array,
+    };
+
     constructor() {
         super();
         this.state = {};
+        console.log(this.props);
     }
-
-    static propTypes = {
-        item: this.props,
-    };
 
     render() {
         return (
