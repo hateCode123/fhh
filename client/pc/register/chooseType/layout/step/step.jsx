@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import style from './step.css';
 
-class Step extends Component {
+class Step extends React.PureComponent {
     render() {
         return (
             <div className={style.zt_register}>

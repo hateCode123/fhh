@@ -1,0 +1,40 @@
+.dc {
+    margin-bottom: 40px;
+}
+.dc a {
+    text-decoration: none;
+}
+.dc a:hover {
+    color: #214780;
+}
+.dc_shuju {
+    float: right;
+    color: #285599;
+    font-size: 14px;
+    text-decoration: none;
+    height: 64px;
+    line-height: 64px;
+    cursor: pointer;
+}
+.dc table {
+    border: solid 1px #e5e5e5;
+    border-bottom: none;
+}
+.dc table tr {
+    height: 50px;
+    text-align: center;
+}
+.dc table td {
+    border-bottom: solid 1px #e5e5e5;
+    font-size: 14px;
+    color: #333333;
+}
+.dc table tr.bg {
+    background: #f6f6f6;
+}
+.sj_img_tab {
+    margin-top: 30px;
+}
+.tableDesin {
+    width: 918px;
+}

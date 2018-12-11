@@ -61,7 +61,10 @@
         "jsx-quotes": ["error", "prefer-double"],
         "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "strict" }],
         "keyword-spacing": ["error", { "before": true, "after": true }],
-        "linebreak-style": ["off", "windows"],
+        "linebreak-style": [
+            "error",
+            "windows"
+          ],
         //"linebreak-style": ["error", "unix"],
         // "lines-around-comment": [
         //     "error",
