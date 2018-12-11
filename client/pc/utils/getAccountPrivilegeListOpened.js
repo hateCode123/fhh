@@ -56,6 +56,7 @@ export const getAccountPrivilegeListOpened = async () => {
     try {
         console.log('getAccountPrivilegeListOpened');
 
+        // @todo  接口
         // const result = await privilegeListOpened();
 
         const result = {};

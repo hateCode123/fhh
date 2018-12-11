@@ -1,0 +1,96 @@
+/*引导页*/
+.yd_k {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    font-family: 'Microsoft YaHei';
+    overflow: hidden;
+}
+
+.zz {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 90;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.about1 {
+    width: 218px;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    margin-left: 264px;
+    background: #f1453d;
+    z-index: 100;
+}
+
+.tyq_text {
+    width: 320px;
+    border-radius: 4px;
+    background: #fff;
+    padding: 20px;
+    z-index: 100;
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    margin-left: 240px;
+}
+
+.tyq_text h3 {
+    font-size: 20px;
+    color: #333333;
+}
+
+.tyq_text p {
+    font-size: 14px;
+    color: #333333;
+    padding: 5px 0;
+}
+
+.tyq_text p a {
+    color: #f54343;
+    text-decoration: none;
+}
+
+.yd_k_btn {
+    width: 120px;
+    height: 36px;
+    border-radius: 4px;
+    background: #f54343;
+    color: #fff;
+    font-size: 14px;
+    line-height: 36px;
+    text-align: center;
+    margin: 18px auto 0;
+    cursor: pointer;
+}
+
+.tyll_text {
+    composes: tyq_text;
+
+    top: 325px;
+    margin-left: -409px;
+    display: none;
+}
+
+.tw_po {
+    width: 140px;
+    height: 38px;
+    position: absolute;
+    top: 355px;
+    background: #fff;
+    left: 50%;
+    margin-left: -600px;
+    font-size: 14px;
+    color: #333333;
+    padding-left: 40px;
+    line-height: 38px;
+    display: none;
+}

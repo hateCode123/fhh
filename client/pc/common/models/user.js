@@ -56,6 +56,21 @@ const models = {
         },
     },
 
+    guide: {
+        data: {
+            showGuide1: false,
+            showGuide2: false,
+        },
+        handlers: {
+            updateGuide(state, action) {
+                return {
+                    ...state,
+                    ...action.payload,
+                };
+            },
+        },
+    },
+
     privilegeList: {
         data: {},
         handlers: {
@@ -63,6 +78,15 @@ const models = {
                 return {
                     ...action.payload,
                 };
+            },
+        },
+    },
+
+    messageNum: {
+        data: 0,
+        handlers: {
+            updateMessageNum(state, action) {
+                return action.payload;
             },
         },
     },

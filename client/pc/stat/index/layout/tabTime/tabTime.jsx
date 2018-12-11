@@ -38,7 +38,7 @@ class TabData extends React.PureComponent {
     }
 
     renderEcharts = () => {
-        let myChart = echarts.init(document.getElementById('main'));
+        const myChart = echarts.init(document.getElementById('main'));
 
         const { echartsData } = this.props;
 

@@ -24,7 +24,7 @@ export const createReducer = (initialState, handlers) => {
 export const createActionCreator = (type, payload) => {
     return (...args) => ({
         payload: typeof payload === 'function' ? payload(...args) : payload,
-        type: type,
+        type,
     });
 };
 
@@ -35,8 +35,10 @@ export const createActionCreator = (type, payload) => {
  * @return {Object} 一个属性名改变过后的新对象
  */
 const prependNamespaces = (handlers, namespace) => {
-    let result = {};
+    const result = {};
+
     Object.keys(handlers).forEach(item => (result[namespace(item)] = handlers[item]));
+
     return result;
 };
 
@@ -47,10 +49,12 @@ const prependNamespaces = (handlers, namespace) => {
  * @
  */
 export const createReducers = (models, namespace) => {
-    let result = {};
+    const result = {};
+
     Object.keys(models).forEach(key => {
         result[key] = createReducer(models[key].data, prependNamespaces(models[key].handlers, namespace));
     });
+
     return result;
 };
 
@@ -62,10 +66,12 @@ const actionCallback = data => data;
  * @param {Function} namespace 对命名空间的处理
  */
 export const createActions = (models, namespace) => {
-    let result = {};
+    const result = {};
+
     Object.keys(models).forEach(key => {
-        let handlers = models[key].handlers;
-        let actions = models[key].actions || {};
+        const handlers = models[key].handlers;
+        const actions = models[key].actions || {};
+
         Object.keys(handlers).forEach(actionName => {
             if (actions[actionName]) {
                 result[actionName] = createActionCreator(namespace(actionName), actions[actionName]);
@@ -74,5 +80,6 @@ export const createActions = (models, namespace) => {
             }
         });
     });
+
     return result;
 };
