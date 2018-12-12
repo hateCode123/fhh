@@ -63,7 +63,7 @@
     font-weight: normal;
 }
 
-.vip span,
+.vip .spanIcon,
 .vip i {
     width: 19px;
     height: 20px;
@@ -74,6 +74,12 @@
 
 .vip i {
     background: url(./images/icon1.png) no-repeat -2px -220px;
+}
+
+.vip .linka {
+    font-size: 12px;
+    color: #285599;
+    text-decoration: none;
 }
 
 .po {
@@ -162,28 +168,6 @@
 
 .gly {
     background: url(./images/icon1.png) no-repeat -2px -212px;
-}
-
-.xf {
-    float: right;
-    width: 50px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 16px;
-    color: #ffffff;
-    font-family: 'Microsoft YaHei';
-    cursor: pointer;
-}
-
-.xfSpan {
-    float: left;
-    opacity: 0.5;
-}
-
-.xf p {
-    width: 30px;
-    float: left;
-    margin-left: 5px;
 }
 
 .box:hover {

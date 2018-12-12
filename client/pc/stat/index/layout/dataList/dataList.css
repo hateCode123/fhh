@@ -1,0 +1,30 @@
+.sj_ul {
+    width: 920px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: solid 1px #e5e5e5;
+    overflow: hidden;
+}
+.sj_ul li {
+    width: 122px;
+    height: 90px;
+    border-radius: 4px;
+    background: #fef3eb;
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+}
+.sj_ul p {
+    font-size: 24px;
+    color: #f54343;
+    margin-top: 14px;
+}
+.sj_ul span {
+    font-size: 14px;
+    color: #333333;
+    margin-top: 9px;
+    display: block;
+}
+.mar_0 {
+    margin-right: 0 !important;
+}
