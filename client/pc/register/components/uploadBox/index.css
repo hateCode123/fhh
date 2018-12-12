@@ -1,5 +1,6 @@
 .big_tx {
     width: 550px;
+    position: relative;
 }
 .uploadWrap {
     margin-bottom: 0.77rem;
@@ -39,4 +40,22 @@
     float: none;
     margin-bottom: 5px;
     display: block;
+}
+.errorTip {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(100, 149, 198, 0.5);
+    & span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #b9bbbe;
+        text-align: center;
+        color: #fff;
+        font-size: 13px;
+    }
 }

@@ -18,7 +18,7 @@ class cropperModal extends React.PureComponent {
         editImageModalVisible: false,
     };
     static propTypes = {
-        file: PropTypes.string,
+        file: PropTypes.object,
         src: PropTypes.string,
         handleClose: PropTypes.func,
         preview: PropTypes.func,

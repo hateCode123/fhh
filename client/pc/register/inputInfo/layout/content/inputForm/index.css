@@ -79,7 +79,7 @@
     font-size: 14px;
     cursor: pointer;
     border-radius: 4px;
-    margin-top: 3px;
+    margin-top: 1px;
     margin-right: 6px;
 }
 .tongyi {
@@ -123,24 +123,36 @@
     color: #666666;
     height: 40px;
 }
+.label_norequired {
+    display: inline-block;
+    text-align: left;
+    width: 157px;
+    font-size: 14px;
+    color: #666666;
+    height: 40px;
+}
 .inputBox_weMediaName {
     height: 62px;
     margin-top: 30px;
+}
+.inputBox_mt10 {
+    height: 62px;
+    margin-top: 10px;
 }
 .inputBox_mt20 {
     height: 62px;
     margin-top: 20px;
 }
-.inputBox_mt10 {
+.inputBox_mt30 {
     height: 62px;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .touxiangBox {
     height: 144px;
 }
 .zhnegjianBox {
-    height: 160px;
+    /* height: 160px; */
 }
 .textAeraBox {
     height: 128px;
@@ -173,4 +185,7 @@
     font-weight: bold;
     margin-bottom: 25px;
     margin: 20px 0;
+}
+.mt_30 {
+    margin-top: 30px;
 }

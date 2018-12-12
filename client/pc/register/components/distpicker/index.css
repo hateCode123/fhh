@@ -1,0 +1,10 @@
+.selectWrap {
+    float: left;
+}
+.select {
+    width: 270px;
+    height: 36px;
+    border: solid 1px #e5e5e5;
+    border-radius: 4px;
+    line-height: 36px;
+}

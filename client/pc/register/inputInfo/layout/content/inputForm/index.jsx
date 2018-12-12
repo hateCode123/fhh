@@ -14,6 +14,7 @@ import { trimSpaceBE } from '../../../../utils/paramsUtil';
 import FormTitle from '../../../../components/formTitle';
 import Crooper from '../../../../components/cropper';
 import UplodBox from '../../../../components/uploadBox';
+import Distpicker from '../../../../components/distpicker';
 
 import Form from 'antd/lib/form';
 import 'antd/lib/form/style/index.css';
@@ -325,7 +326,7 @@ class Content extends React.PureComponent {
             <FormItem
                 label={<span className={style.label}>运营者身份证照片</span>}
                 colon={false}
-                style={{ marginTop: '20px', marginRight: '0px' }}>
+                style={{ marginTop: '40px', marginRight: '0px' }}>
                 {getFieldDecorator('idCardImg', {
                     rules: [
                         {
@@ -333,7 +334,7 @@ class Content extends React.PureComponent {
                             message: '请上传有效证件照片',
                         },
                     ],
-                })(<UplodBox />)}
+                })(<UplodBox type={1} />)}
             </FormItem>
         );
         // 手机号相关
@@ -389,6 +390,99 @@ class Content extends React.PureComponent {
                 {/* {this.state.phoneNumErrors !== '' ? <ErrorTip text={this.state.phoneNumErrors} /> : null} */}
             </Fragment>
         );
+        // 运营所在地
+        const operatorAddress = (
+            <FormItem
+                label={<span className={style.label}>运营所在地</span>}
+                colon={false}
+                style={{ marginTop: '20px', marginRight: '0px' }}>
+                {getFieldDecorator('operatorAddress', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请选择运营所在地',
+                        },
+                    ],
+                })(<Distpicker />)}
+            </FormItem>
+        );
+        // 邮箱
+        const operatorMail = (
+            <FormItem
+                label={<span className={style.label_norequired}>联系邮箱</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('operatorMail', {})(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
+                    />,
+                )}
+            </FormItem>
+        );
+        // 备注信息
+        const otherContacts = (
+            <FormItem
+                label={<span className={style.label_norequired}>备注信息</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('otherContacts', {})(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
+                        placeholder="请输入备注信息"
+                    />,
+                )}
+            </FormItem>
+        );
+
+        // 辅助材料
+        const supportMaterials = (
+            <FormItem
+                label={<span className={style.label_norequired}>辅助材料</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('supportMaterials', {})(
+                    <TextArea
+                        style={{
+                            width: '548px',
+                            height: '100px',
+                        }}
+                        placeholder="请填写您在其他平台的主页链接，或微信公众号名称、ID，如在微信公众号、头条号已获得原创证明，可直接填写带原创标识的文章链接，将一并审核开通“原创”功能
+                        "
+                    />,
+                )}
+            </FormItem>
+        );
+        // 材料证明
+        const materialCertificateImg = (
+            <FormItem
+                label={<span className={style.label_norequired}>材料证明</span>}
+                colon={false}
+                style={{ marginTop: '40px', marginRight: '0px' }}>
+                {getFieldDecorator('materialCertificateImg', {})(<UplodBox type={2} />)}
+            </FormItem>
+        );
+        // 备注信息
+        const invitationCode = (
+            <FormItem
+                label={<span className={style.label_norequired}>入驻邀请码</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('invitationCode', {})(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
+                    />,
+                )}
+            </FormItem>
+        );
 
         return (
             <Fragment>
@@ -417,14 +511,32 @@ class Content extends React.PureComponent {
                         {/* 姓名 */}
                         <div className={style.inputBox_mt10}>{operatorName}</div>
                         {/* 有效证件 */}
-                        <div className={style.inputBox_mt10}>{idCard}</div>
+                        <div className={style.inputBox}>{idCard}</div>
                         {/* 证件图片 */}
                         <div className={style.zhnegjianBox}>{idCardImg}</div>
+                        {/* 手机号相关 */}
+                        <div className={style.mt_30}>
+                            {operatorTelephone}
+                            <button ref={'btn'} className={style.btn} onClick={this.clickGetCodeBtn.bind(this)}>
+                                {this.state.text}
+                            </button>
+                        </div>
 
-                        {operatorTelephone}
-                        <button ref={'btn'} className={style.btn} onClick={this.clickGetCodeBtn.bind(this)}>
-                            {this.state.text}
-                        </button>
+                        {/* 所在地 */}
+                        <div className={style.inputBox_mt20}>{operatorAddress}</div>
+                        {/* 邮箱 */}
+                        <div className={style.inputBox_mt30}>{operatorMail}</div>
+                        {/* 备注 */}
+                        <div className={style.inputBox_mt10}>{otherContacts}</div>
+
+                        {/* 其他信息 */}
+                        <h3 className={style.yy_info}>其他信息</h3>
+                        {/* 辅助材料 */}
+                        <div>{supportMaterials}</div>
+                        <div>{materialCertificateImg}</div>
+                        {/* 邀请码 */}
+                        <div className={style.inputBox_mt30}>{invitationCode}</div>
+
                         <div className={style.tongyi}>
                             <div className={style.btn_ty}>
                                 <FormItem>{getFieldDecorator('agree', {})(<CheckBox />)}</FormItem>

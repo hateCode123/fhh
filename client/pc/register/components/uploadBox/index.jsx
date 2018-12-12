@@ -12,10 +12,13 @@ class UplodBox extends React.PureComponent {
     state = {
         selectedImageFile: '',
         src: '',
+        errorTipShow: false,
+        errorMsg: '',
     };
 
     static propTypes = {
-        onChange: PropTypes.func,
+        type: PropTypes.number,
+        onChange: PropTypes.funnc,
     };
 
     handleFileChange = e => {
@@ -43,11 +46,14 @@ class UplodBox extends React.PureComponent {
                         },
                         () => {
                             this.preview(this.state.src);
+                            this.onChangeHandle();
+                            this.errorTip('上传失败');
                         },
                     );
                 };
             } else {
                 console.error('文件过大');
+                this.errorTip('文件过大');
             }
         }
 
@@ -57,15 +63,57 @@ class UplodBox extends React.PureComponent {
     preview = src => {
         // console.log(src);
         this.refs.uploader.style.background = `url(${src}) no-repeat center center`;
+        this.refs.uploader.style.backgroundSize = '120px 120px';
+    };
+
+    errorTip = error => {
+        if (error) {
+            this.setState({
+                errorTipShow: true,
+                errorMsg: error,
+            });
+        }
+    };
+
+    onChangeHandle = src => {
+        const { onChange } = this.props;
+
+        if (onChange) {
+            const formValue = epimg;
+
+            onChange(formValue);
+        }
     };
 
     render() {
-        console.log(this.props);
-        const { onChange } = this.props;
+        // console.log(this.props);
+        const { type } = this.props;
 
         /**
          * 组件分发数据
          */
+        const tip = type => {
+            if (type === 1) {
+                return (
+                    <p className={style.yy_img}>
+                        <i className={style.tx_ys}>
+                            <img src={epimg} />{' '}
+                        </i>
+                        请按参考示例进行拍摄，要求身份证号码、照片清晰可见， 大小不超过 5M
+                    </p>
+                );
+            } else if (type === 2) {
+                return (
+                    <p className={style.yy_img}>
+                        请提供图片形式的证明（如您的专栏、微博、微信公众号
+                        等后台管理页面截图），如在微信公众号、今日头条号已
+                        获得原创证明，可直接上传相关证明截图，将一并审核开 通“原创”功能，大小不超过 5M
+                    </p>
+                );
+            } else {
+                return null;
+            }
+        };
 
         return (
             <Fragment>
@@ -78,13 +126,14 @@ class UplodBox extends React.PureComponent {
                                 onChange={this.handleFileChange}
                             />
                         </div>
+
+                        {this.state.errorTipShow ? (
+                            <div className={style.errorTip}>
+                                <span>上传失败</span>
+                            </div>
+                        ) : null}
                     </div>
-                    <p className={style.yy_img}>
-                        <i className={style.tx_ys}>
-                            <img src={epimg} />{' '}
-                        </i>
-                        请按参考示例进行拍摄，要求身份证号码、照片清晰可见， 大小不超过 5M
-                    </p>
+                    {tip(type)}
                 </div>
             </Fragment>
         );

@@ -27,7 +27,7 @@ class Header extends React.PureComponent {
      */
 
     componentDidMount() {
-        initGetHeaderData();
+        // initGetHeaderData();
     }
 
     render() {

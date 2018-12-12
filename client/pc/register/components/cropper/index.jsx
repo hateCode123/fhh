@@ -67,7 +67,7 @@ class MyCropper extends React.PureComponent {
     };
 
     preview = src => {
-        console.log(src);
+        // console.log(src);
         this.refs.cropperWrap.style.backgroundImage = `url(${src})`;
         const { onChange } = this.props;
 
