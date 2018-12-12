@@ -1,14 +1,12 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import style from './index.css';
-import { connect } from 'react-redux';
 import errorBoundary from '@ifeng/errorBoundary';
 import localimg from './011.jpg';
 
 /**
  * for this page
  */
-import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import CropperModal from '../cropperModal';
 
@@ -17,6 +15,10 @@ class MyCropper extends React.PureComponent {
         selectedImageFile: '',
         src: '',
         editImageModalVisible: false,
+    };
+
+    static propTypes = {
+        onChange: PropTypes.func,
     };
 
     handleFileChange = e => {
@@ -57,7 +59,7 @@ class MyCropper extends React.PureComponent {
         e.target.value = '';
     };
 
-    handleClose = e => {
+    handleClose = () => {
         this.setState({
             selectedImageFile: '',
             editImageModalVisible: false,
@@ -65,7 +67,7 @@ class MyCropper extends React.PureComponent {
     };
 
     preview = src => {
-        // console.log(src)
+        console.log(src);
         this.refs.cropperWrap.style.backgroundImage = `url(${src})`;
         const { onChange } = this.props;
 
@@ -77,7 +79,7 @@ class MyCropper extends React.PureComponent {
     };
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
 
         /**
          * 组件分发数据

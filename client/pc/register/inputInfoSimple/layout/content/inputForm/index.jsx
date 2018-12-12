@@ -24,6 +24,11 @@ const FormItem = Form.Item;
 class Content extends React.PureComponent {
     static propTypes = {
         form: PropTypes.object,
+        asyncQueryKeywords: PropTypes.func,
+        asyncGetValidateCode: PropTypes.func,
+        updateUiStatus: PropTypes.func,
+        changeRegisterValues: PropTypes.func,
+        asyncRegister: PropTypes.func,
     };
     state = {
         values: {},
@@ -128,6 +133,7 @@ class Content extends React.PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {
             const value = trimSpaceBE(fieldsValue);
+
             console.log(value);
             if (!fieldsValue.agree) {
                 return;

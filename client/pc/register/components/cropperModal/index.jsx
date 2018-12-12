@@ -17,8 +17,14 @@ class cropperModal extends React.PureComponent {
         src: '',
         editImageModalVisible: false,
     };
+    static propTypes = {
+        file: PropTypes.string,
+        src: PropTypes.string,
+        handleClose: PropTypes.func,
+        preview: PropTypes.func,
+    };
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         // console.log(nextProps);
         if (nextProps !== this.props) {
             this.setState({
@@ -32,7 +38,7 @@ class cropperModal extends React.PureComponent {
     //     console.log(this.refs);
     // }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // console.log(this.props)
         const { file, src } = this.props;
 

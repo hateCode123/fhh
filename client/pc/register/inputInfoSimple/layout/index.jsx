@@ -17,7 +17,7 @@ import TipModal from '../components/tipsModal';
 
 class Layout extends React.PureComponent {
     static propTypes = {
-        // uiStatus: PropTypes.boolean,
+        uiStatus: PropTypes.object,
     };
 
     render() {

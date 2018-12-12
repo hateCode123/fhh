@@ -16,6 +16,10 @@ class TipsModal extends React.PureComponent {
         count: 5,
     };
 
+    static propTypes = {
+        updateUiStatus: PropTypes.func,
+    };
+
     componentDidMount() {
         console.log('出现啦');
         this.timerCountDown();
@@ -61,7 +65,6 @@ class TipsModal extends React.PureComponent {
         /**
          * 组件分发数据
          */
-        const { isTipsModalShow } = this.props.uiStatus;
 
         return (
             <Fragment>

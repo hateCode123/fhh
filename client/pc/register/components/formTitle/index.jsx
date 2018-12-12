@@ -14,7 +14,7 @@ class FormTitle extends React.PureComponent {
     // static propTypes = {
     //     content: PropTypes.object,
     // };
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.changeTitle();
     }
     getRegisterType() {

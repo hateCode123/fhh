@@ -11,6 +11,10 @@ import pic from './dui_img.png';
  */
 
 class TipsModal extends React.PureComponent {
+    static propTypes = {
+        updateUiStatus: PropTypes.func,
+    };
+
     state = {
         timeCount: 5,
         count: 5,
@@ -61,7 +65,6 @@ class TipsModal extends React.PureComponent {
         /**
          * 组件分发数据
          */
-        const { isTipsModalShow } = this.props.uiStatus;
 
         return (
             <Fragment>

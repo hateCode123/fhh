@@ -1,22 +1,21 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import style from './index.css';
-import { connect } from 'react-redux';
 import errorBoundary from '@ifeng/errorBoundary';
 import epimg from './tx_ys.png';
 
 /**
  * for this page
  */
-import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css';
-import CropperModal from '../cropperModal';
 
 class UplodBox extends React.PureComponent {
     state = {
         selectedImageFile: '',
         src: '',
-        editImageModalVisible: false,
+    };
+
+    static propTypes = {
+        onChange: PropTypes.func,
     };
 
     handleFileChange = e => {
@@ -43,9 +42,7 @@ class UplodBox extends React.PureComponent {
                             src: img,
                         },
                         () => {
-                            this.setState({
-                                editImageModalVisible: true,
-                            });
+                            this.preview(this.state.src);
                         },
                     );
                 };
@@ -57,10 +54,14 @@ class UplodBox extends React.PureComponent {
         e.target.value = '';
     };
 
-    preview = src => {};
+    preview = src => {
+        // console.log(src);
+        this.refs.uploader.style.background = `url(${src}) no-repeat center center`;
+    };
 
     render() {
         console.log(this.props);
+        const { onChange } = this.props;
 
         /**
          * 组件分发数据
@@ -70,8 +71,12 @@ class UplodBox extends React.PureComponent {
             <Fragment>
                 <div className={`${style.big_tx} clearfix`}>
                     <div className={style.uploadWrap}>
-                        <div className={style.uploadContainer}>
-                            <input type="file" />
+                        <div ref="uploader" className={style.uploadContainer}>
+                            <input
+                                type="file"
+                                accept="image/jpeg,image/jpg,image/png"
+                                onChange={this.handleFileChange}
+                            />
                         </div>
                     </div>
                     <p className={style.yy_img}>

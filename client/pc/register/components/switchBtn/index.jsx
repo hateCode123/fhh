@@ -16,7 +16,7 @@ class SwitchBtn extends React.PureComponent {
         linkTo: '/register/inputInfo',
         linkToText: '切换至“传统入驻”模式',
     };
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.changeLinkTo();
     }
     getRegisterType() {

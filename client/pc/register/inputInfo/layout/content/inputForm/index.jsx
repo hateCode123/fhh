@@ -30,6 +30,11 @@ const { TextArea } = Input;
 class Content extends React.PureComponent {
     static propTypes = {
         form: PropTypes.object,
+        asyncQueryKeywords: PropTypes.func,
+        asyncGetValidateCode: PropTypes.func,
+        updateUiStatus: PropTypes.func,
+        changeRegisterValues: PropTypes.func,
+        asyncRegister: PropTypes.func,
     };
     state = {
         values: {},
