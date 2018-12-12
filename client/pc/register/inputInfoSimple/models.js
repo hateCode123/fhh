@@ -160,7 +160,7 @@ export const asyncRegister = () => {
         console.log(getState());
         getRegisterParams(getState);
         // let result =
-        if (true) {
+        if (getState().inputInfoSimple.registerValues.agree) {
             dispatch(
                 actions.changeUiStatus({
                     isTipsModalShow: true,

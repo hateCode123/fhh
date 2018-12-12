@@ -1,5 +1,6 @@
 // 参数处理部分，需要根据服务器端对于参数的接收方案来进行调整。
 
+/* eslint-disable */
 export const paramsEncode = (param, key, encode) => {
     if (param === null) return '';
     let paramStr = '';
