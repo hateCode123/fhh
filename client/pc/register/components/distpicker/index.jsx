@@ -19,7 +19,7 @@ class Distpicker extends React.PureComponent {
     };
 
     static propTypes = {
-        onChange: PropTypes.funnc,
+        onChange: PropTypes.func,
     };
 
     onChange = this.props.onChange;

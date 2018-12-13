@@ -59,3 +59,9 @@
         font-size: 13px;
     }
 }
+.downloadUrl {
+    font-size: 14px;
+    color: #285599;
+    cursor: pointer;
+    text-decoration: none;
+}

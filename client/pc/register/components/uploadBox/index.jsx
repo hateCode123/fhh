@@ -18,7 +18,8 @@ class UplodBox extends React.PureComponent {
 
     static propTypes = {
         type: PropTypes.number,
-        onChange: PropTypes.funnc,
+        onChange: PropTypes.func,
+        downloadUrl: PropTypes.string,
     };
 
     handleFileChange = e => {
@@ -85,9 +86,15 @@ class UplodBox extends React.PureComponent {
         }
     };
 
+    stopDefault = e => {
+        if (e & e.preventDefault) {
+            e.preventDefault();
+        }
+    };
+
     render() {
         // console.log(this.props);
-        const { type } = this.props;
+        const { type, downloadUrl } = this.props;
 
         /**
          * 组件分发数据
@@ -108,6 +115,17 @@ class UplodBox extends React.PureComponent {
                         请提供图片形式的证明（如您的专栏、微博、微信公众号
                         等后台管理页面截图），如在微信公众号、今日头条号已
                         获得原创证明，可直接上传相关证明截图，将一并审核开 通“原创”功能，大小不超过 5M
+                    </p>
+                );
+            } else if (type === 3) {
+                return <p className={style.yy_img}>请上传组织机构代码证，确保信息清晰可见，大小不超过5M</p>;
+            } else if (type === 4) {
+                return (
+                    <p className={style.yy_img}>
+                        填写并加盖公司红章后扫描上传，大小不超过 5M<br />
+                        <a href={downloadUrl} onClick={this.stopDefault} className={style.downloadUrl}>
+                            合同授权书下载
+                        </a>
                     </p>
                 );
             } else {
