@@ -9,19 +9,19 @@ class ChooseList extends Component {
     state = {
         arr: [
             {
-                href: '#',
+                href: '/register/inputInfoSimple',
                 img: regiNum1,
                 title: '个人自媒体',
                 text: '适合垂直领域专家、意见领袖、评论家及自媒体人事申请',
             },
             {
-                href: '#',
+                href: '/register/inputInfoMtrz',
                 img: regiNum2,
                 title: '机构媒体自媒体',
                 text: '适合报纸、杂志、电视、电台、通讯社或其他相关品牌，产品与服务等',
             },
             {
-                href: '#',
+                href: '/register/inputInfoQtrz',
                 img: regiNum3,
                 title: '其他组织自媒体',
                 text: '适合各类公共场馆、公益机构、学校、社团、民间组织以生产内容为主的组织机构和社会组织等',

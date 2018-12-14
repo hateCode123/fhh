@@ -21,7 +21,7 @@ class Layout extends React.PureComponent {
     };
 
     render() {
-        // console.log(this.props);
+        console.log(this.props);
         /**
          * 组件分发数据
          */
@@ -41,7 +41,7 @@ class Layout extends React.PureComponent {
     }
 }
 const mapStateToProps = state => ({
-    uiStatus: state.inputInfoSimple.uiStatus,
+    uiStatus: state.inputInfoQtrz.uiStatus,
 });
 
 const mapDispatchToProps = dispatch => ({

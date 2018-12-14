@@ -36,6 +36,26 @@ const models = {
             },
         },
     },
+
+    // 提交是否成功
+    registerStatus: {
+        data: '',
+        handlers: {
+            changeRegisterStatus(state, action) {
+                return action.payload;
+            },
+        },
+    },
+
+    // 错误提示
+    errorMessage: {
+        data: '',
+        handlers: {
+            changeErrorMessage(state, action) {
+                return action.payload;
+            },
+        },
+    },
     // 过滤选项--所有列表
 };
 
@@ -141,26 +161,49 @@ export const asyncGetValidateCode = str => {
 };
 
 const getRegisterParams = getState => {
-    const registerValuesObj = getState().inputInfo.registerValues;
+    const registerValuesObj = getState().inputInfoMtrz.registerValues;
 
-    const postParams = {};
+    const postParams = { ...registerValuesObj };
 
-    postParams.weMediaType = '1';
+    delete postParams.agree;
+
+    postParams.weMediaType = '2';
     postParams.weMediaImg =
         'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e8c22a3022cd7dbsize25_w200_h200.jpg';
-    postParams.weMediaName = registerValuesObj.weMediaName;
-    postParams.weMediaName = registerValuesObj.operatorTelephone;
-    if (registerValuesObj.validateCode) {
-        postParams.weMediaName = registerValuesObj.validateCode;
-    }
+
+    return postParams;
 };
 
+// 点击注册功能
 export const asyncRegister = () => {
     return async (dispatch, getState) => {
-        console.log(getState());
-        getRegisterParams(getState);
-        // let result =
-        if (getState().inputInfo.registerValues.agree) {
+        try {
+            console.log(getState());
+
+            let result = await {
+                data: null,
+                status: 'success',
+                code: 1000,
+                message: '自媒体名称已经存在111',
+            };
+
+            if (getState().inputInfoMtrz.registerValues.agree) {
+                const params = getRegisterParams(getState);
+
+                console.log(params);
+                if (result.code === 1000) {
+                    console.log('注册成功');
+                    dispatch(actions.changeRegisterStatus('success'));
+                } else {
+                    console.log('注册失败');
+                    dispatch(actions.changeRegisterStatus('error'));
+
+                    dispatch(actions.changeErrorMessage(result.message));
+                }
+            }
+        } catch (e) {
+            throw e;
+        } finally {
             dispatch(
                 actions.changeUiStatus({
                     isTipsModalShow: true,

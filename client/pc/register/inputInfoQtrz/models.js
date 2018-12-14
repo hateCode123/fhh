@@ -7,7 +7,7 @@ const urls = {
     queryUsernameKeywords: '/napi/pc/account/checkIllegalName',
     // queryCommentLog: '/log/comment/query', // 查询
 };
-const path = name => `register:inputInfoSimple:${name}`;
+const path = name => `register:inputInfoQtrz:${name}`;
 
 const models = {
     // 注册信息
@@ -37,27 +37,17 @@ const models = {
         },
     },
 
-    // 头像
-    weMediaImg: {
-        data: '',
-        handlers: {
-            changeWeMediaImg(state, action) {
-                return action.payload;
-            },
-        },
-    },
-
-    // 注册状态
+    // 提交是否成功
     registerStatus: {
         data: '',
         handlers: {
-            changeRegsiterStatus(state, action) {
+            changeRegisterStatus(state, action) {
                 return action.payload;
             },
         },
     },
 
-    // 注册失败的信息
+    // 错误提示
     errorMessage: {
         data: '',
         handlers: {
@@ -66,7 +56,6 @@ const models = {
             },
         },
     },
-
     // 过滤选项--所有列表
 };
 
@@ -172,22 +161,15 @@ export const asyncGetValidateCode = str => {
 };
 
 const getRegisterParams = getState => {
-    const registerValuesObj = getState().inputInfoSimple.registerValues;
+    const registerValuesObj = getState().inputInfoQtrz.registerValues;
 
-    const postParams = {};
+    const postParams = { ...registerValuesObj };
 
-    postParams.weMediaType = '1';
+    delete postParams.agree;
 
-    const profilePhoto = getState().inputInfoSimple.weMediaImg;
-
-    console.log(profilePhoto);
-
-    postParams.weMediaImg = profilePhoto;
-    postParams.weMediaName = registerValuesObj.weMediaName;
-    postParams.operatorTelephone = registerValuesObj.operatorTelephone;
-    if (registerValuesObj.validateCode) {
-        postParams.validateCode = registerValuesObj.validateCode;
-    }
+    postParams.weMediaType = '3';
+    postParams.weMediaImg =
+        'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e8c22a3022cd7dbsize25_w200_h200.jpg';
 
     return postParams;
 };
@@ -196,22 +178,25 @@ const getRegisterParams = getState => {
 export const asyncRegister = () => {
     return async (dispatch, getState) => {
         try {
-            if (getState().inputInfoSimple.registerValues.agree) {
-                let result = {
-                    data: null,
-                    status: 'success',
-                    code: 1000,
-                    message: '自媒体名称已经存在',
-                };
-                let params = getRegisterParams(getState);
+            console.log(getState());
+
+            let result = await {
+                data: null,
+                status: 'success',
+                code: 1000,
+                message: '自媒体名称已经存在111',
+            };
+
+            if (getState().inputInfoQtrz.registerValues.agree) {
+                const params = getRegisterParams(getState);
 
                 console.log(params);
                 if (result.code === 1000) {
-                    console.log('注册cg');
-                    dispatch(actions.changeRegsiterStatus('success'));
+                    console.log('注册成功');
+                    dispatch(actions.changeRegisterStatus('success'));
                 } else {
-                    console.log('error');
-                    dispatch(actions.changeRegsiterStatus('error'));
+                    console.log('注册失败');
+                    dispatch(actions.changeRegisterStatus('error'));
 
                     dispatch(actions.changeErrorMessage(result.message));
                 }

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import style from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
-import geren from '../../../../images/geren.png';
+import geren from '../../../../images/jigou.png';
 import request from '../../../../../utils/request';
 import touXiang from '../../../../images/df_tx.png';
 import { connect } from 'react-redux';
@@ -224,7 +224,7 @@ class Content extends React.PureComponent {
         });
         const categoryId = (
             <FormItem
-                label={<span className={style.label}>大风号头像</span>}
+                label={<span className={style.label}>专注领域</span>}
                 colon={false}
                 style={{ marginRight: '0px' }}>
                 {getFieldDecorator('categoryId', {

@@ -18,11 +18,17 @@ class TipsModal extends React.PureComponent {
 
     static propTypes = {
         updateUiStatus: PropTypes.func,
+        registerStatus: PropTypes.string,
+        errorMessage: PropTypes.string,
     };
 
     componentDidMount() {
         console.log('出现啦');
-        this.timerCountDown();
+        const { registerStatus } = this.props;
+
+        if (registerStatus === 'success') {
+            this.timerCountDown();
+        }
     }
 
     componentWillUnmount() {
@@ -43,12 +49,11 @@ class TipsModal extends React.PureComponent {
                     count: timeCount,
                 },
                 () => {
-                    if (timeCount === 0) {
+                    if (timeCount < 0) {
                         clearInterval(timer);
                         this.setState({
                             timeCount: 5,
                             count: 5,
-                            text: '重新获取',
                         });
                         this.props.updateUiStatus({ isTipsModalShow: false });
                     }
@@ -65,18 +70,28 @@ class TipsModal extends React.PureComponent {
         /**
          * 组件分发数据
          */
+        const { registerStatus, errorMessage } = this.props;
 
         return (
             <Fragment>
                 <div className={style.mask} onClick={this.handlerClick.bind(this)}>
                     <div className={style.submit_k}>
-                        <div className={style.dui_img}>
-                            <img src={pic} />{' '}
-                        </div>
-                        <p>提交成功</p>
-                        <p>
-                            <span>{this.state.count}</span>秒后自动跳转到体验页
-                        </p>
+                        {registerStatus && registerStatus === 'success' ? (
+                            <Fragment>
+                                <div className={style.dui_img}>
+                                    <img src={pic} />{' '}
+                                </div>
+                                <p>提交成功</p>
+                                <p>
+                                    <span>{this.state.count}</span>秒后自动跳转到等待审核页面
+                                </p>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <p className={style.error}>{errorMessage}</p>
+                                <p>点击关闭</p>
+                            </Fragment>
+                        )}
                     </div>
                 </div>
             </Fragment>
@@ -86,6 +101,8 @@ class TipsModal extends React.PureComponent {
 
 const mapStateToProps = state => ({
     uiStatus: state.inputInfoSimple.uiStatus,
+    registerStatus: state.inputInfoSimple.registerStatus,
+    errorMessage: state.inputInfoSimple.errorMessage,
 });
 
 const mapDispatchToProps = dispatch => ({

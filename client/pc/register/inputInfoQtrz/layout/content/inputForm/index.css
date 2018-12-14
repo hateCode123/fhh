@@ -1,0 +1,191 @@
+.xx_register {
+    width: 720px;
+    margin: 0 auto;
+    font-family: 'Microsoft YaHei';
+    margin-top: 40px;
+    & :global(.ant-form-item) {
+        margin-right: 0;
+    }
+}
+.lx {
+    height: 40px;
+    line-height: 38px;
+    display: block;
+    & span {
+        float: left;
+        width: 156px;
+        font-size: 14px;
+        color: #666666;
+    }
+}
+.lx_t,
+.lx_tt {
+    float: left;
+    font-size: 14px;
+}
+.lx_t img {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.df_tx {
+    width: 720px;
+    overflow: hidden;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    & span {
+        float: left;
+        width: 156px;
+        font-size: 14px;
+        color: #666666;
+    }
+}
+.big_tx {
+    float: left;
+    width: 560px;
+    & img {
+        float: left;
+        margin-right: 20px;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+    }
+    & p {
+        float: left;
+        color: #999999;
+    }
+}
+.errorBox {
+    height: 30px;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+.codeBox {
+    float: left;
+    width: 562px;
+}
+.btn {
+    margin-left: 9px;
+    float: right;
+    width: 140px;
+    height: 36px;
+    border: solid 1px #e5e5e5;
+    background: #f6f6f6;
+    line-height: 36px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 1px;
+    margin-right: 6px;
+}
+.tongyi {
+    padding-left: 160px;
+    margin-top: 20px;
+    height: 20px;
+    display: block;
+    position: relative;
+    & p {
+        float: left;
+        margin-left: 38px;
+        font-size: 0.9em;
+    }
+}
+.btn_ty {
+    position: absolute;
+    top: -12px;
+    left: 170px;
+    /* float: left;  */
+}
+.btn_sq {
+    width: 120px;
+    height: 40px;
+    margin: 35px auto 48px;
+    text-align: center;
+    line-height: 40px;
+    background: #f54343;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn_sq:hover {
+    background: #e63e3e;
+}
+.label {
+    display: inline-block;
+    text-align: left;
+    width: 145px;
+    font-size: 14px;
+    color: #666666;
+    height: 40px;
+}
+.label_norequired {
+    display: inline-block;
+    text-align: left;
+    width: 157px;
+    font-size: 14px;
+    color: #666666;
+    height: 40px;
+}
+.inputBox_weMediaName {
+    height: 62px;
+    margin-top: 30px;
+}
+.inputBox_mt10 {
+    height: 62px;
+    margin-top: 10px;
+}
+.inputBox_mt20 {
+    height: 62px;
+    margin-top: 20px;
+}
+.inputBox_mt30 {
+    height: 62px;
+    margin-top: 30px;
+}
+
+.touxiangBox {
+    height: 144px;
+}
+.zhnegjianBox {
+    /* height: 160px; */
+}
+.textAeraBox {
+    height: 128px;
+    /* margin-top: 30px; */
+}
+.required {
+    display: inline-block;
+    margin-top: 9px;
+}
+.required::before {
+    display: inline-block;
+    margin-right: 4px;
+    content: '*';
+    font-family: SimSun;
+    line-height: 1;
+    font-size: 14px;
+    color: #f5222d;
+}
+:global {
+    & .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: #f5222d !important;
+    }
+    & .ant-checkbox-inner {
+        background-color: #e5e5e5 !important;
+    }
+}
+.yy_info {
+    font-size: 20px;
+    color: #f54343;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin: 20px 0;
+}
+.mt_30 {
+    margin-top: 30px;
+}

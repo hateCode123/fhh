@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import style from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
-import geren from '../../../../images/geren.png';
+import geren from '../../../../images/jigou.png';
 import request from '../../../../../utils/request';
 import touXiang from '../../../../images/df_tx.png';
 import { connect } from 'react-redux';
@@ -40,7 +40,7 @@ class Content extends React.PureComponent {
     state = {
         values: {},
         phoneNumErrors: '',
-        timeCount: 60,
+        timeCount: 5,
         text: '获取验证码',
         btnDisable: false,
         subBtnDisable: false,
@@ -224,7 +224,7 @@ class Content extends React.PureComponent {
         });
         const categoryId = (
             <FormItem
-                label={<span className={style.label}>专注领域</span>}
+                label={<span className={style.label}>大风号头像</span>}
                 colon={false}
                 style={{ marginRight: '0px' }}>
                 {getFieldDecorator('categoryId', {
@@ -440,20 +440,100 @@ class Content extends React.PureComponent {
             </FormItem>
         );
 
-        // 辅助材料
-        const supportMaterials = (
+        // 媒体名称
+        const organizationName = (
             <FormItem
-                label={<span className={style.label_norequired}>辅助材料</span>}
+                label={<span className={style.label}>媒体名称</span>}
                 colon={false}
                 style={{ marginRight: '0px' }}>
-                {getFieldDecorator('supportMaterials', {})(
-                    <TextArea
+                {getFieldDecorator('organizationName', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请输入媒体名称',
+                        },
+                    ],
+                    validateTrigger: 'onBlur',
+                })(
+                    <Input
                         style={{
                             width: '548px',
-                            height: '100px',
+                            height: '36px',
                         }}
-                        placeholder="请填写您在其他平台的主页链接，或微信公众号名称、ID，如在微信公众号、头条号已获得原创证明，可直接填写带原创标识的文章链接，将一并审核开通“原创”功能
-                        "
+                        placeholder="请输入媒体名称"
+                    />,
+                )}
+            </FormItem>
+        );
+        // 媒体地址
+        const organizationAddress = (
+            <FormItem
+                label={<span className={style.label}>媒体地址</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('organizationAddress', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请输入媒体地址',
+                        },
+                    ],
+                    validateTrigger: 'onBlur',
+                })(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
+                        placeholder="请输入媒体地址"
+                    />,
+                )}
+            </FormItem>
+        );
+        // 媒体机构代码证
+        const mediaCodePic = (
+            <FormItem
+                label={<span className={style.label}>媒体机构代码证</span>}
+                colon={false}
+                style={{ marginTop: '40px', marginRight: '0px' }}>
+                {getFieldDecorator('mediaCodePic', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请上传媒体机构代码证照片',
+                        },
+                    ],
+                })(<UplodBox type={3} />)}
+            </FormItem>
+        );
+        // 合同授权书
+        const contractPic = (
+            <FormItem
+                label={<span className={style.label}>合同授权书</span>}
+                colon={false}
+                style={{ marginTop: '40px', marginRight: '0px' }}>
+                {getFieldDecorator('contractPic', {
+                    rules: [
+                        {
+                            required: true,
+                            message: '请上传合同授权书照片',
+                        },
+                    ],
+                })(<UplodBox type={4} />)}
+            </FormItem>
+        );
+        // 官方网站
+        const officialWebsite = (
+            <FormItem
+                label={<span className={style.label_norequired}>官方网站</span>}
+                colon={false}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('officialWebsite', {})(
+                    <Input
+                        style={{
+                            width: '548px',
+                            height: '36px',
+                        }}
                     />,
                 )}
             </FormItem>
@@ -463,11 +543,11 @@ class Content extends React.PureComponent {
             <FormItem
                 label={<span className={style.label_norequired}>材料证明</span>}
                 colon={false}
-                style={{ marginTop: '40px', marginRight: '0px' }}>
-                {getFieldDecorator('materialCertificateImg', {})(<UplodBox type={2} />)}
+                style={{ marginRight: '0px' }}>
+                {getFieldDecorator('contractPic', {})(<UplodBox type={2} />)}
             </FormItem>
         );
-        // 备注信息
+        // 入住邀请码
         const invitationCode = (
             <FormItem
                 label={<span className={style.label_norequired}>入驻邀请码</span>}
@@ -492,7 +572,7 @@ class Content extends React.PureComponent {
                     <div className={`${style.lx} clearfix`}>
                         <span>类型</span>
                         <div className={style.lx_t}>
-                            <img src={geren} />个人自媒体{' '}
+                            <img src={geren} />其他组织自媒体{' '}
                         </div>
                     </div>
                     <Form layout="inline">
@@ -531,8 +611,17 @@ class Content extends React.PureComponent {
 
                         {/* 其他信息 */}
                         <h3 className={style.yy_info}>其他信息</h3>
-                        {/* 辅助材料 */}
-                        <div>{supportMaterials}</div>
+                        {/* 媒体名称 */}
+                        <div className={style.inputBox_mt10}>{organizationName}</div>
+                        {/* 媒体地址 */}
+                        <div className={style.inputBox_mt10}>{organizationAddress}</div>
+                        {/* 媒体或组织机构代码证 */}
+                        <div>{mediaCodePic}</div>
+                        {/* 合同授权书 */}
+                        <div>{contractPic}</div>
+                        {/* 官方网站 */}
+                        <div className={style.inputBox_mt30}>{officialWebsite}</div>
+                        {/* 材料证明 */}
                         <div>{materialCertificateImg}</div>
                         {/* 邀请码 */}
                         <div className={style.inputBox_mt30}>{invitationCode}</div>
@@ -557,7 +646,7 @@ class Content extends React.PureComponent {
     }
 }
 const mapStateToProps = state => ({
-    uiStatus: state.inputInfo.uiStatus,
+    uiStatus: state.inputInfoQtrz.uiStatus,
 });
 
 const mapDispatchToProps = dispatch => ({

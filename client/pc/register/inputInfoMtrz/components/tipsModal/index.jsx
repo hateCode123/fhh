@@ -13,6 +13,8 @@ import pic from './dui_img.png';
 class TipsModal extends React.PureComponent {
     static propTypes = {
         updateUiStatus: PropTypes.func,
+        registerStatus: PropTypes.string,
+        errorMessage: PropTypes.string,
     };
 
     state = {
@@ -22,7 +24,11 @@ class TipsModal extends React.PureComponent {
 
     componentDidMount() {
         console.log('出现啦');
-        this.timerCountDown();
+        const { registerStatus } = this.props;
+
+        if (registerStatus && registerStatus === 'success') {
+            this.timerCountDown();
+        }
     }
 
     componentWillUnmount() {
@@ -65,27 +71,37 @@ class TipsModal extends React.PureComponent {
         /**
          * 组件分发数据
          */
+        const { registerStatus, errorMessage } = this.props;
 
         return (
-            <Fragment>
-                <div className={style.mask} onClick={this.handlerClick.bind(this)}>
-                    <div className={style.submit_k}>
-                        <div className={style.dui_img}>
-                            <img src={pic} />{' '}
-                        </div>
-                        <p>提交成功</p>
-                        <p>
-                            <span>{this.state.count}</span>秒后自动跳转到体验页
-                        </p>
-                    </div>
+            <div className={style.mask} onClick={this.handlerClick.bind(this)}>
+                <div className={style.submit_k}>
+                    {registerStatus && registerStatus === 'success' ? (
+                        <Fragment>
+                            <div className={style.dui_img}>
+                                <img src={pic} />{' '}
+                            </div>
+                            <p>提交成功</p>
+                            <p>
+                                <span>{this.state.count}</span>秒后自动跳转到等待审核页面
+                            </p>
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+                            <p className={style.error}>{errorMessage}</p>
+                            <p>点击关闭</p>
+                        </Fragment>
+                    )}
                 </div>
-            </Fragment>
+            </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    uiStatus: state.inputInfo.uiStatus,
+    uiStatus: state.inputInfoMtrz.uiStatus,
+    registerStatus: state.inputInfoMtrz.registerStatus,
+    errorMessage: state.inputInfoMtrz.errorMessage,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -24,7 +24,6 @@ class TipsModal extends React.PureComponent {
 
     componentDidMount() {
         console.log('出现啦');
-        console.log(this.props);
         const { registerStatus } = this.props;
 
         if (registerStatus && registerStatus === 'success') {
@@ -50,7 +49,7 @@ class TipsModal extends React.PureComponent {
                     count: timeCount,
                 },
                 () => {
-                    if (timeCount < 0) {
+                    if (timeCount === 0) {
                         clearInterval(timer);
                         this.setState({
                             timeCount: 5,
@@ -75,34 +74,36 @@ class TipsModal extends React.PureComponent {
         const { registerStatus, errorMessage } = this.props;
 
         return (
-            <div className={style.mask} onClick={this.handlerClick.bind(this)}>
-                <div className={style.submit_k}>
-                    {registerStatus && registerStatus === 'success' ? (
-                        <Fragment>
-                            <div className={style.dui_img}>
-                                <img src={pic} />{' '}
-                            </div>
-                            <p>提交成功</p>
-                            <p>
-                                <span>{this.state.count}</span>秒后自动跳转到等待审核页面
-                            </p>
-                        </Fragment>
-                    ) : (
-                        <Fragment>
-                            <p className={style.error}>{errorMessage}</p>
-                            <p>点击关闭</p>
-                        </Fragment>
-                    )}
+            <Fragment>
+                <div className={style.mask} onClick={this.handlerClick.bind(this)}>
+                    <div className={style.submit_k}>
+                        {registerStatus && registerStatus === 'success' ? (
+                            <Fragment>
+                                <div className={style.dui_img}>
+                                    <img src={pic} />{' '}
+                                </div>
+                                <p>提交成功</p>
+                                <p>
+                                    <span>{this.state.count}</span>秒后自动跳转到等待审核页面
+                                </p>
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <p className={style.error}>{errorMessage}</p>
+                                <p>点击关闭</p>
+                            </Fragment>
+                        )}
+                    </div>
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    uiStatus: state.inputInfo.uiStatus,
-    registerStatus: state.inputInfo.registerStatus,
-    errorMessage: state.inputInfo.errorMessage,
+    uiStatus: state.inputInfoQtrz.uiStatus,
+    registerStatus: state.inputInfoQtrz.registerStatus,
+    errorMessage: state.inputInfoQtrz.errorMessage,
 });
 
 const mapDispatchToProps = dispatch => ({

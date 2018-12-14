@@ -142,6 +142,7 @@ class UplodBox extends React.PureComponent {
                                 type="file"
                                 accept="image/jpeg,image/jpg,image/png"
                                 onChange={this.handleFileChange}
+                                title="选择文件"
                             />
                         </div>
 

@@ -6,7 +6,14 @@ import geren from '../../../../images/geren.png';
 import request from '../../../../../utils/request';
 import touXiang from '../../../../images/df_tx.png';
 import { connect } from 'react-redux';
-import { actions, asyncQueryKeywords, asyncQueryPhoneNum, asyncGetValidateCode, asyncRegister } from '../../../models';
+import {
+    actions,
+    asyncQueryKeywords,
+    asyncQueryPhoneNum,
+    asyncGetValidateCode,
+    asyncRegister,
+    changeWeMediaImg,
+} from '../../../models';
 import { trimSpaceBE } from '../../../../utils/paramsUtil';
 /**
  * for this page
@@ -29,6 +36,7 @@ class Content extends React.PureComponent {
         updateUiStatus: PropTypes.func,
         changeRegisterValues: PropTypes.func,
         asyncRegister: PropTypes.func,
+        changeWeMediaImg: PropTypes.func,
     };
     state = {
         values: {},
@@ -37,7 +45,13 @@ class Content extends React.PureComponent {
         text: '获取验证码',
         btnDisable: false,
         subBtnDisable: false,
+        profilePhoto: touXiang,
     };
+
+    componentDidMount() {
+        this.getProfilePhotoAtRandom();
+    }
+
     // 校验用户名关键字
     handleKeywords = async (rule, value, callback) => {
         const { getFieldValue } = this.props.form;
@@ -71,6 +85,38 @@ class Content extends React.PureComponent {
         }
     };
 
+    // 获取随机头像
+    getProfilePhotoAtRandom = () => {
+        const imgs = [
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e8c22a3022cd7dbsize25_w200_h200.jpg',
+            'https://my.ifengimg.com/2018/12/14/d41d8cd98f00b2041544774423_1.jpg',
+            'http://p2.ifengimg.com/ifengimcp/pic/20181214/779205e051809735189f_size15_w128_h128.jpg',
+        ];
+
+        const getIndexAtRandom = arr => {
+            let num = '';
+
+            if (arr.length !== 0) {
+                num = Math.floor(Math.random() * arr.length);
+            }
+
+            return num;
+        };
+
+        let img = imgs[getIndexAtRandom(imgs)];
+
+        if (img) {
+            this.setState(
+                {
+                    profilePhoto: img,
+                },
+                () => {
+                    this.props.changeWeMediaImg(this.state.profilePhoto);
+                },
+            );
+        }
+    };
+
     // 获取验证码
     getValidateCode = str => {
         const res = this.props.asyncGetValidateCode(str);
@@ -99,7 +145,7 @@ class Content extends React.PureComponent {
                             btnDisable: true,
                         },
                         () => {
-                            if (timeCount === 0) {
+                            if (timeCount < 0) {
                                 clearInterval(timer);
                                 this.setState({
                                     timeCount: 60,
@@ -153,6 +199,7 @@ class Content extends React.PureComponent {
         // const { defaultValue, errors } = this.state;
         const { getFieldDecorator, getFieldsError } = this.props.form;
         const errors = getFieldsError(['operatorTelephone', 'validateCode']);
+        const { profilePhoto } = this.state;
 
         console.log(errors);
 
@@ -268,7 +315,7 @@ class Content extends React.PureComponent {
                     <div className={`${style.df_tx} clearfix`}>
                         <span>大风号头像</span>
                         <div className={style.big_tx}>
-                            <img src={touXiang} />
+                            <img src={profilePhoto} />
                             <p>
                                 极速入驻后的体验期，个人头像均为随机头像。<br />
                                 正式入驻后，用户可修改头像。
@@ -313,6 +360,7 @@ const mapDispatchToProps = dispatch => ({
     asyncRegister: () => dispatch(asyncRegister()),
     updateUiStatus: obj => dispatch(actions.changeUiStatus(obj)),
     changeRegisterValues: obj => dispatch(actions.changeRegisterValues(obj)),
+    changeWeMediaImg: str => dispatch(actions.changeWeMediaImg(str)),
 });
 
 export default connect(
