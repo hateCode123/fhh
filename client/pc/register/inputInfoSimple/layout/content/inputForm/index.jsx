@@ -88,9 +88,22 @@ class Content extends React.PureComponent {
     // 获取随机头像
     getProfilePhotoAtRandom = () => {
         const imgs = [
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e1d0abe9465282csize12_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/2fd0dd7cc4d985fsize15_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e254309fbee7b8dsize10_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/c966ef1a76468fasize18_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/7f24e8621b1d25dsize9_w200_h200.jpg',
             'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e8c22a3022cd7dbsize25_w200_h200.jpg',
-            'https://my.ifengimg.com/2018/12/14/d41d8cd98f00b2041544774423_1.jpg',
-            'http://p2.ifengimg.com/ifengimcp/pic/20181214/779205e051809735189f_size15_w128_h128.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/62e81de444b4acasize7_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/47c75c084ab4391size18_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/e254309fbee7b8dsize10_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/75b5f8f888f0271size11_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/0e6ffae328318e3size7_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/017c989b75b3649size73_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/dcd01c50b757300size9_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/9a463dcb4d548a9size9_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/67e4c4c5122dc6csize9_w200_h200.jpg',
+            'http://d.ifengimg.com/w100_h100/p0.ifengimg.com/a/2018/0822/ce51d408cee5fe4size6_w200_h200.jpg',
         ];
 
         const getIndexAtRandom = arr => {

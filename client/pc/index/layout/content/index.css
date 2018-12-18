@@ -1,0 +1,10 @@
+.col_right {
+    width: 1000px;
+    float: right;
+    background: #fff;
+    font-family: 'Microsoft YaHei';
+}
+.col_920 {
+    width: 920px;
+    margin: 30px auto 0;
+}

@@ -2,10 +2,17 @@ import { createReducers, createActions, request } from '../../utils/';
 import { combineReducers } from 'redux';
 // import { APIHOST } from '../../config';
 // import { getUrlParams } from './utils';
+const LOCATIONIP = 'http://test0.fhh.ifeng.com';
+const apiInterfaceHost = `${LOCATIONIP}/napi`;
+const APIHOST = apiInterfaceHost;
 
 const urls = {
-    queryUsernameKeywords: '/napi/pc/account/checkIllegalName',
-    // queryCommentLog: '/log/comment/query', // 查询
+    getChannel: `${APIHOST}/category/findList`, // 获取专注领域
+    queryUsernameKeywords: `${APIHOST}/pc/account/checkIllegalName`, // 验证关键字
+    getLocation: `${APIHOST}/account/addressByIp`, // 获取用户地址
+    checkPhoneNum: `${APIHOST}/pc/check/tel`, // 校验手机号
+    getSms: `${APIHOST}/send/sms`, // 获取验证码
+    register: `${LOCATIONIP}/api/account/register`, // 注册接口
 };
 const path = name => `register:inputInfoMtrz:${name}`;
 
@@ -33,6 +40,16 @@ const models = {
         handlers: {
             changeUiStatus(state, action) {
                 return { ...state, ...action.payload };
+            },
+        },
+    },
+
+    // 专注领域
+    categoryIdOption: {
+        data: [],
+        handlers: {
+            changeCategoryIdOption(state, action) {
+                return action.payload;
             },
         },
     },
@@ -70,6 +87,74 @@ const formateDateTime = arr => {
     };
 };
 
+// 获取专注领域
+export const asyncGetChannel = () => {
+    return async (dispatch, getState) => {
+        try {
+            const params = {
+                level: 1,
+                type: 1,
+            };
+            // const result = await request(urls.getChannel, { data: params, type: 'get' });
+            const result = await {
+                success: true,
+                data: {
+                    rows: [
+                        {
+                            name: '凤凰',
+                            id: '5854cc129cd31025a647acc4',
+                        },
+                        {
+                            name: '百科',
+                            id: '5854cc129cd31025a647acb1',
+                        },
+                        {
+                            name: '争鸣',
+                            id: '5854cc129cd31025a647accc',
+                        },
+                        {
+                            name: '时政',
+                            id: '5858d867afbea52c129b4773',
+                        },
+                        {
+                            name: '国际',
+                            id: '5854cc129cd31025a647acb6',
+                        },
+                    ],
+                },
+                status: 'success',
+                code: 1000,
+                message: '',
+            };
+            let data = '';
+
+            // console.log('获取频道');
+            if (result.code === 1000) {
+                data = result.data.rows;
+            }
+            // console.log(data);
+
+            let channelOptions = [];
+
+            data.map(item => {
+                let obj = {};
+
+                obj.label = item.name;
+                obj.value = item.id;
+                channelOptions.push(obj);
+
+                return true;
+            });
+            // console.log(channelOptions);
+            dispatch(actions.changeCategoryIdOption(channelOptions));
+
+            return result;
+        } catch (e) {
+            throw e;
+        }
+    };
+};
+
 // 查询大凤号名关键词
 export const asyncQueryKeywords = str => {
     return async (dispatch, getState) => {
@@ -77,7 +162,7 @@ export const asyncQueryKeywords = str => {
 
         if (str) {
             const userName = str;
-            // await request(urls.queryUsernameKeywords, {data:{userName}, type:'string'})
+            // const result = await request(urls.queryUsernameKeywords, {data:{userName}, type:'post'})
             const result = {
                 data: {
                     isIllegal: false,
@@ -107,7 +192,7 @@ export const asyncQueryPhoneNum = str => {
 
         if (str) {
             const phoneNum = str;
-            // await request(urls.queryUsernameKeywords, {data:{userName}, type:'string'})
+            // const result = await request(urls.queryUsernameKeywords, {data:{userName}, type:'get'})
             const result = {
                 data: {
                     isExist: false,
@@ -136,6 +221,8 @@ export const asyncGetValidateCode = str => {
     return (dispatch, getState) => {
         console.log('获取验证码');
         console.log(str);
+        const operatorTelephone = str;
+        // const res = await request(urls.getSms, {data: {operatorTelephone}});
         const res1 = {
             data: {
                 isExist: true,
@@ -191,6 +278,8 @@ export const asyncRegister = () => {
                 const params = getRegisterParams(getState);
 
                 console.log(params);
+                // const result = await request(urls.register, { data: params, type: 'post' });
+
                 if (result.code === 1000) {
                     console.log('注册成功');
                     dispatch(actions.changeRegisterStatus('success'));

@@ -10,7 +10,7 @@ import Sider from '../../components/sider/';
 /**
  * for this page
  */
-// import Content from './content/';
+import Content from './content/';
 
 class Layout extends React.PureComponent {
     static propTypes = {
@@ -28,7 +28,7 @@ class Layout extends React.PureComponent {
                 <Header />
                 <div className={style.col}>
                     <Sider />
-                    {/* <Content /> */}
+                    <Content />
                 </div>
                 <Footer />
                 <BottomAffix />

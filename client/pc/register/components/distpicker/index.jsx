@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import style from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 import { ChineseDistricts } from './distpicker.data';
+import { request } from '../../../utils/request';
 
 /**
  * for this page
@@ -16,29 +17,62 @@ class Distpicker extends React.PureComponent {
         city: [],
         provinceSelected: '',
         citySelected: '',
+        defaultAdress: {},
     };
 
     static propTypes = {
         onChange: PropTypes.func,
+        // defaultAdress: PropTypes.object,
     };
 
     onChange = this.props.onChange;
-    UNSAFE_componentWillMount() {
+
+    asyncGetLocation = async () => {
+        // const result = await request(urls.getLocation, { data: {}, type: 'get' });
+        const result = await {
+            data: {
+                province: '河北省',
+                city: '石家庄市',
+            },
+            status: 'success',
+            code: 1000,
+            message: '',
+        };
+
+        if (result.code === 1000) {
+            console.log('获取地址');
+
+            return result.data;
+        }
+    };
+
+    getLocation() {
+        const res = this.asyncGetLocation();
+
+        return res;
+    }
+
+    async componentDidMount() {
         // console.log(ChineseDistricts[86])
         const provinceArr = this.formatObj(ChineseDistricts[86]);
-        // console.log(provinceArr);
+
+        const defaultAdress = await this.getLocation();
 
         this.setState(
             {
-                province: provinceArr,
+                province: [{ key: 100000, value: '', label: '请选择' }, ...provinceArr],
             },
             () => {
-                const defaultValueP = '天津市';
+                const defaultValueP = defaultAdress.province || '';
+                const defaultValueC = defaultAdress.city || '';
 
-                const defaultValueC = '天津市市辖区';
+                console.log(defaultValueP);
+                const has = this.checkDefaultValue(defaultValueP, provinceArr);
+
+                console.log(has);
 
                 this.setState({
-                    provinceSelected: '天津市',
+                    provinceSelected: has ? defaultValueP : '',
                 });
                 const cityKey = this.getKey(defaultValueP, provinceArr);
 
@@ -47,19 +81,29 @@ class Distpicker extends React.PureComponent {
 
                 this.setState(
                     {
-                        city: cityArr,
+                        city: [{ key: 100000, value: '', label: '请选择' }, ...cityArr],
                     },
                     () => {
                         this.setState({
-                            citySelected: defaultValueC,
+                            citySelected: has ? defaultValueC : '',
                         });
-                        const param = this.handleLocaiton(defaultValueP, defaultValueC);
+                        const param = this.handleLocaiton(has ? defaultValueP : '', has ? defaultValueC : '');
 
                         this.onChange(param);
                     },
                 );
             },
         );
+    }
+
+    checkDefaultValue(str, arr) {
+        const newArr = arr.filter(item => {
+            return item.value === str;
+        });
+
+        console.log(newArr);
+
+        return newArr.length > 0;
     }
 
     getKey = (str, arr) => {
@@ -85,6 +129,7 @@ class Distpicker extends React.PureComponent {
             if (obj.hasOwnProperty(key)) {
                 newObj.key = Number(key);
                 newObj.value = obj[key];
+                newObj.label = obj[key];
 
                 newArr.push(newObj);
             }
@@ -97,36 +142,48 @@ class Distpicker extends React.PureComponent {
         let value = e.target.value;
 
         // console.log(value);
-        this.setState(
-            {
-                provinceSelected: value,
-            },
-            () => {
-                const cityKey = this.getKey(value, this.state.province);
+        if (value) {
+            this.setState(
+                {
+                    provinceSelected: value,
+                },
+                () => {
+                    const cityKey = this.getKey(value, this.state.province);
 
-                // console.log(cityKey);
-                const cityArr = this.formatObj(ChineseDistricts[cityKey]);
+                    // console.log(cityKey);
+                    const cityArr = this.formatObj(ChineseDistricts[cityKey]);
 
-                console.log(cityArr);
+                    console.log(cityArr);
 
-                if (cityArr[0]) {
-                    this.setState({
-                        city: cityArr,
-                        citySelected: cityArr[0].value,
-                    });
+                    if (cityArr[0]) {
+                        this.setState({
+                            city: [{ key: 100000, value: '', label: '请选择' }, ...cityArr],
+                            citySelected: cityArr[0].value,
+                        });
 
-                    const param = this.handleLocaiton(value, cityArr[0].value);
+                        const param = this.handleLocaiton(value, cityArr[0].value);
 
-                    this.onChange(param);
-                }
-            },
-        );
+                        this.onChange(param);
+                    }
+                },
+            );
+        } else {
+            this.setState({
+                city: [{ key: 100000, value: '', label: '请选择' }],
+                provinceSelected: '',
+                citySelected: '',
+            });
+            this.onChange('');
+        }
     };
     // 当选择市级时
     handleCity = e => {
         let value = e.target.value;
 
         // console.log(value);
+        // if (!value) {
+        //     return false;
+        // }
         this.setState(
             {
                 citySelected: value,
@@ -142,7 +199,11 @@ class Distpicker extends React.PureComponent {
     };
 
     handleLocaiton = (province, city) => {
-        const param = province + city;
+        let param = '';
+
+        if (province) {
+            param = `${province}${city}`;
+        }
 
         console.log(param);
 
@@ -150,7 +211,7 @@ class Distpicker extends React.PureComponent {
     };
 
     render() {
-        // console.log(this.props);
+        console.log(this.props);
 
         /**
          * 组件分发数据
@@ -158,14 +219,14 @@ class Distpicker extends React.PureComponent {
         const provinceOptions = this.state.province.map(item => {
             return (
                 <option value={item.value} key={item.value}>
-                    {item.value}
+                    {item.label}
                 </option>
             );
         });
         const cityOptions = this.state.city.map(item => {
             return (
                 <option value={item.value} key={item.value}>
-                    {item.value}
+                    {item.label}
                 </option>
             );
         });

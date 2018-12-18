@@ -2,10 +2,15 @@ import { createReducers, createActions, request } from '../../utils/';
 import { combineReducers } from 'redux';
 // import { APIHOST } from '../../config';
 // import { getUrlParams } from './utils';
+const LOCATIONIP = 'http://test0.fhh.ifeng.com';
+const apiInterfaceHost = `${LOCATIONIP}/napi`;
+const APIHOST = apiInterfaceHost;
 
 const urls = {
-    queryUsernameKeywords: '/napi/pc/account/checkIllegalName',
-    // queryCommentLog: '/log/comment/query', // 查询
+    queryUsernameKeywords: `${APIHOST}/pc/account/checkIllegalName`, // 验证关键字
+    checkPhoneNum: `${APIHOST}/pc/check/tel`, // 校验手机号
+    getSms: `${APIHOST}/send/sms`, // 获取验证码
+    register: `${LOCATIONIP}/api/account/experience/register`, // 注册接口
 };
 const path = name => `register:inputInfoSimple:${name}`;
 
@@ -88,7 +93,7 @@ export const asyncQueryKeywords = str => {
 
         if (str) {
             const userName = str;
-            // await request(urls.queryUsernameKeywords, {data:{userName}, type:'string'})
+            // const result =  await request(urls.queryUsernameKeywords, {data:{userName}, type:'get'})
             const result = {
                 data: {
                     isIllegal: false,
@@ -117,8 +122,8 @@ export const asyncQueryPhoneNum = str => {
         await console.log(str);
 
         if (str) {
-            const phoneNum = str;
-            // await request(urls.queryUsernameKeywords, {data:{userName}, type:'string'})
+            const operatorTelephone = str;
+            // const result = await request(urls.checkPhoneNum, {data: operatorTelephone }, type:'get'});
             const result = {
                 data: {
                     isExist: false,
@@ -147,6 +152,8 @@ export const asyncGetValidateCode = str => {
     return (dispatch, getState) => {
         console.log('获取验证码');
         console.log(str);
+        const operatorTelephone = str;
+        // const res = await request(urls.getSms, {data: {operatorTelephone}});
         const res1 = {
             data: {
                 isExist: true,
@@ -206,8 +213,10 @@ export const asyncRegister = () => {
                 let params = getRegisterParams(getState);
 
                 console.log(params);
+                // const result = await request(urls.register, { data: params, type: 'post' });
+
                 if (result.code === 1000) {
-                    console.log('注册cg');
+                    console.log('注册成功');
                     dispatch(actions.changeRegsiterStatus('success'));
                 } else {
                     console.log('error');

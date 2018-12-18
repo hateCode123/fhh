@@ -6,7 +6,14 @@ import geren from '../../../../images/geren.png';
 import request from '../../../../../utils/request';
 import touXiang from '../../../../images/df_tx.png';
 import { connect } from 'react-redux';
-import { actions, asyncQueryKeywords, asyncQueryPhoneNum, asyncGetValidateCode, asyncRegister } from '../../../models';
+import {
+    actions,
+    asyncQueryKeywords,
+    asyncQueryPhoneNum,
+    asyncGetValidateCode,
+    asyncRegister,
+    asyncGetChannel,
+} from '../../../models';
 import { trimSpaceBE } from '../../../../utils/paramsUtil';
 /**
  * for this page
@@ -24,6 +31,7 @@ import CheckBox from 'antd/lib/checkbox';
 import 'antd/lib/checkbox/style/index.css';
 import Select from 'antd/lib/select';
 import 'antd/lib/select/style/index.css';
+// import { stat } from 'fs';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -36,6 +44,8 @@ class Content extends React.PureComponent {
         updateUiStatus: PropTypes.func,
         changeRegisterValues: PropTypes.func,
         asyncRegister: PropTypes.func,
+        asyncGetChannel: PropTypes.func,
+        categoryIdOption: PropTypes.array,
     };
     state = {
         values: {},
@@ -44,6 +54,15 @@ class Content extends React.PureComponent {
         text: '获取验证码',
         btnDisable: false,
         subBtnDisable: false,
+    };
+
+    componentDidMount() {
+        this.asyncGetChannels();
+    }
+
+    // 获取专注领域
+    asyncGetChannels = async () => {
+        const res = await this.props.asyncGetChannel();
     };
     // 校验关键字
     handleKeywords = async (rule, value, callback) => {
@@ -196,25 +215,27 @@ class Content extends React.PureComponent {
         // 大风号头像
         const weMediaImg = (
             <FormItem
-                label={<span className={style.label}>大风号头像</span>}
+                label={
+                    <span className={style.label}>
+                        大风号头像<br />
+                        <span style={{ color: 'red' }}>(接口未通)</span>
+                    </span>
+                }
                 colon={false}
                 style={{ marginTop: '20px', marginRight: '0px' }}>
                 {getFieldDecorator('weMediaImg', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请上传头像',
-                        },
-                    ],
+                    // rules: [
+                    //     {
+                    //         required: true,
+                    //         message: '请上传头像',
+                    //     },
+                    // ],
                 })(<Crooper />)}
             </FormItem>
         );
         // 专注领域
-        const categoryIdOptionData = [
-            { label: '测试1', value: 1 },
-            { label: '测试2', value: 2 },
-            { label: '测试3', value: 3 },
-        ];
+        const categoryIdOptionData = this.props.categoryIdOption;
+
         const categoryIdOption = categoryIdOptionData.map(item => {
             return (
                 <Option value={item.value} key={item.value}>
@@ -324,16 +345,21 @@ class Content extends React.PureComponent {
         // 运营者身份证照片
         const idCardImg = (
             <FormItem
-                label={<span className={style.label}>运营者身份证照片</span>}
+                label={
+                    <span className={style.label}>
+                        运营者身份证照片<br />
+                        <span style={{ color: 'red' }}>(接口未通)</span>
+                    </span>
+                }
                 colon={false}
                 style={{ marginTop: '40px', marginRight: '0px' }}>
                 {getFieldDecorator('idCardImg', {
-                    rules: [
-                        {
-                            required: true,
-                            message: '请上传有效证件照片',
-                        },
-                    ],
+                    // rules: [
+                    //     {
+                    //         required: true,
+                    //         message: '请上传有效证件照片',
+                    //     },
+                    // ],
                 })(<UplodBox type={1} />)}
             </FormItem>
         );
@@ -461,7 +487,12 @@ class Content extends React.PureComponent {
         // 材料证明
         const materialCertificateImg = (
             <FormItem
-                label={<span className={style.label_norequired}>材料证明</span>}
+                label={
+                    <span className={style.label_norequired}>
+                        材料证明<br />
+                        <span style={{ color: 'red' }}>(接口未通)</span>
+                    </span>
+                }
                 colon={false}
                 style={{ marginTop: '40px', marginRight: '0px' }}>
                 {getFieldDecorator('materialCertificateImg', {})(<UplodBox type={2} />)}
@@ -558,6 +589,8 @@ class Content extends React.PureComponent {
 }
 const mapStateToProps = state => ({
     uiStatus: state.inputInfo.uiStatus,
+    categoryIdOption: state.inputInfo.categoryIdOption,
+    userLocation: state.inputInfo.userLocation,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -565,6 +598,7 @@ const mapDispatchToProps = dispatch => ({
     asyncQueryPhoneNum: str => dispatch(asyncQueryPhoneNum(str)),
     asyncGetValidateCode: str => dispatch(asyncGetValidateCode(str)),
     asyncRegister: () => dispatch(asyncRegister()),
+    asyncGetChannel: () => dispatch(asyncGetChannel()),
     updateUiStatus: obj => dispatch(actions.changeUiStatus(obj)),
     changeRegisterValues: obj => dispatch(actions.changeRegisterValues(obj)),
 });
