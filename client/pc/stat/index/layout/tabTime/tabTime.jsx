@@ -7,7 +7,7 @@ import echarts from 'echarts/lib/echarts';
 {
     /* //引入柱状图*/
 }
-import 'echarts/lib/chart/Line';
+import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/bar';
 {
     /* 引入提示框和标题组件*/
