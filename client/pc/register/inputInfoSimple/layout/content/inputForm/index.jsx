@@ -37,11 +37,12 @@ class Content extends React.PureComponent {
         changeRegisterValues: PropTypes.func,
         asyncRegister: PropTypes.func,
         changeWeMediaImg: PropTypes.func,
+        asyncQueryPhoneNum: PropTypes.func,
     };
     state = {
         values: {},
         phoneNumErrors: '',
-        timeCount: 5,
+        timeCount: 60,
         text: '获取验证码',
         btnDisable: false,
         subBtnDisable: false,
@@ -75,8 +76,8 @@ class Content extends React.PureComponent {
         const operatorTelephone = getFieldValue('operatorTelephone');
 
         if (operatorTelephone) {
-            // const result = await this.props.asyncQueryPhoneNum(operatorTelephone);
-            const result = '';
+            const result = await this.props.asyncQueryPhoneNum(operatorTelephone);
+            // const result = '';
 
             console.log(result);
             if (result) {
