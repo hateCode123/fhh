@@ -10,7 +10,7 @@ const responseFailHandler = result => {
             break;
         case 1002:
             // 账号未注册
-            url = '/chooseType';
+            url = '/register/chooseType';
             break;
         case 1003:
             //  账号审核中

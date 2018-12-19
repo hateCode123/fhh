@@ -2,15 +2,13 @@ import { createReducers, createActions, request } from '../../utils/';
 import { combineReducers } from 'redux';
 // import { APIHOST } from '../../config';
 // import { getUrlParams } from './utils';
-const LOCATIONIP = 'http://test0.fhh.ifeng.com';
-const apiInterfaceHost = `${LOCATIONIP}/napi`;
-const APIHOST = apiInterfaceHost;
+const APIHOST = '';
 
 const urls = {
-    queryUsernameKeywords: `${APIHOST}/pc/account/checkIllegalName`, // 验证关键字
-    checkPhoneNum: `${APIHOST}/pc/check/tel`, // 校验手机号
-    getSms: `${APIHOST}/send/sms`, // 获取验证码
-    register: `${LOCATIONIP}/api/account/experience/register`, // 注册接口
+    queryUsernameKeywords: `${APIHOST}/napi/pc/account/checkIllegalName`, // 验证关键字
+    checkPhoneNum: `${APIHOST}/napi/pc/check/tel`, // 校验手机号
+    getSms: `${APIHOST}/napi/send/sms`, // 获取验证码
+    register: `${APIHOST}/api/account/experience/register`, // 注册接口
 };
 const path = name => `register:inputInfoSimple:${name}`;
 
@@ -93,7 +91,7 @@ export const asyncQueryKeywords = str => {
 
         if (str) {
             const userName = str;
-            const result = await request(urls.queryUsernameKeywords, { data: { userName }, type: 'get' });
+            const result = await request(urls.queryUsernameKeywords, { data: { userName } });
             // const result = {
             //     data: {
             //         isIllegal: true,
@@ -125,7 +123,7 @@ export const asyncQueryPhoneNum = str => {
 
         if (str) {
             const operatorTelephone = str;
-            const result = await request(urls.checkPhoneNum, { data: operatorTelephone, type: 'get' });
+            const result = await request(urls.checkPhoneNum, { data: { operatorTelephone }, type: 'get' });
             // const result = {
             //     data: {
             //         isExist: true,
@@ -155,7 +153,7 @@ export const asyncGetValidateCode = str => {
         console.log('获取验证码');
         console.log(str);
         const operatorTelephone = str;
-        const res = request(urls.getSms, { data: operatorTelephone });
+        const res = request(urls.getSms, { data: { operatorTelephone } });
         // const res1 = {
         //     data: {
         //         isExist: true,

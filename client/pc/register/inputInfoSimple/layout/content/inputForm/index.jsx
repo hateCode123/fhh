@@ -75,6 +75,7 @@ class Content extends React.PureComponent {
 
         const operatorTelephone = getFieldValue('operatorTelephone');
 
+        console.log(operatorTelephone);
         if (operatorTelephone) {
             const result = await this.props.asyncQueryPhoneNum(operatorTelephone);
             // const result = '';
