@@ -71,25 +71,49 @@ if (env === 'development') {
         io.sockets.emit('reload');
     });
 
-    const proxy = require('koa-better-http-proxy');
+    const proxy = require('koa-proxies');
 
-    const selfProxy = (from, to) => {
-        return async (ctx, next) => {
-            if (ctx.url.indexOf(from) === 0) {
-                return await proxy(to, {
-                    proxyReqPathResolver: ctx => {
-                        console.log(ctx.headers['host'] + ctx.url, '-->', to + ctx.url);
-                    },
-                })(ctx);
-            } else {
-                await next();
-            }
-        };
-    };
+    // middleware
+    app.use(proxy('/napi', {
+        target: 'http://test0.fhh.ifeng.com',    
+        changeOrigin: true,
+        // agent: new httpsProxyAgent('http://1.2.3.4:88'), // if you need or just delete this line
+        // rewrite: path => path.replace(/^\/octocat(\/|\/\w+)?$/, '/vagusx'),
+        logs: true
+    }));
+    app.use(proxy('/api', {
+        target: 'http://test0.fhh.ifeng.com',    
+        changeOrigin: true,
+        // agent: new httpsProxyAgent('http://1.2.3.4:88'), // if you need or just delete this line
+        // rewrite: path => path.replace(/^\/octocat(\/|\/\w+)?$/, '/vagusx'),
+        logs: true
+    }));
+    app.use(proxy('/capi', {
+        target: 'http://test0.fhh.ifeng.com',    
+        changeOrigin: true,
+        // agent: new httpsProxyAgent('http://1.2.3.4:88'), // if you need or just delete this line
+        // rewrite: path => path.replace(/^\/octocat(\/|\/\w+)?$/, '/vagusx'),
+        logs: true
+    }));
+    // const proxy = require('koa-better-http-proxy');
 
-    app.use(selfProxy('/api', 'http://test0.fhh.ifeng.com'));
-    app.use(selfProxy('/napi', 'http://test0.fhh.ifeng.com'));
-    app.use(selfProxy('/capi', 'http://test0.fhh.ifeng.com'));
+    // const selfProxy = (from, to) => {
+    //     return async (ctx, next) => {
+    //         if (ctx.url.indexOf(from) === 0) {
+    //             return await proxy(to, {
+    //                 proxyReqPathResolver: ctx => {
+    //                     console.log(ctx.headers['host'] + ctx.url, '-->', to + ctx.url);
+    //                 },
+    //             })(ctx);
+    //         } else {
+    //             await next();
+    //         }
+    //     };
+    // };
+
+    // app.use(selfProxy('/api', 'http://test0.fhh.ifeng.com'));
+    // app.use(selfProxy('/napi', 'http://test0.fhh.ifeng.com'));
+    // app.use(selfProxy('/capi', 'http://test0.fhh.ifeng.com'));
 
 } else if (env === 'pre_development') {
     // 静态资源设置

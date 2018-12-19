@@ -103,6 +103,7 @@ export const asyncQueryKeywords = str => {
             let errorMsg = '';
 
             if (result.code === 1000) {
+                console.log('成功');
                 if (!result.data.isIllegal) {
                     errorMsg = '您输入的名称中含有敏感词';
 

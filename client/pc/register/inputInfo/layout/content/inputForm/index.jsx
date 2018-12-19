@@ -46,6 +46,7 @@ class Content extends React.PureComponent {
         asyncRegister: PropTypes.func,
         asyncGetChannel: PropTypes.func,
         categoryIdOption: PropTypes.array,
+        asyncQueryPhoneNum: PropTypes.func,
     };
     state = {
         values: {},
@@ -87,8 +88,8 @@ class Content extends React.PureComponent {
         const operatorTelephone = getFieldValue('operatorTelephone');
 
         if (operatorTelephone) {
-            // const result = await this.props.asyncQueryPhoneNum(operatorTelephone);
-            const result = '';
+            const result = await this.props.asyncQueryPhoneNum(operatorTelephone);
+            // const result = '';
 
             console.log(result);
             if (result) {

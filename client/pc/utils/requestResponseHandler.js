@@ -26,6 +26,7 @@ const responseFailHandler = result => {
             break;
         case 1009:
         case 4001:
+        case 5001:
         case 0:
             // 非法请求
             // 暂无权限访问
@@ -43,13 +44,18 @@ const responseFailHandler = result => {
  * @func 根据接口返回的code码，决定页面跳转去哪里
  * @param {*} result
  */
+
 export const requestResponseHandler = result => {
     try {
         console.log('requestResponseHandler', result);
 
         switch (result.status) {
             case 'fail':
-                responseFailHandler(result);
+                if (result.code === 5001) {
+                    return result;
+                } else {
+                    responseFailHandler(result);
+                }
                 break;
             case 'success':
                 return result;

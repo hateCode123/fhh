@@ -27,7 +27,7 @@ export default async function request(url, options) {
     try {
         console.log('result=', result);
 
-        // requestResponseHandler(result);
+        return requestResponseHandler(result);
     } catch (error) {
         console.error('request error url = ', url, ', error is ', error);
         throw error;

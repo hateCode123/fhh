@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import style from './index.css';
 import errorBoundary from '@ifeng/errorBoundary';
 import { ChineseDistricts } from './distpicker.data';
-import { request } from '../../../utils/request';
+import { request } from '../../../utils/';
 
 /**
  * for this page
@@ -28,22 +28,24 @@ class Distpicker extends React.PureComponent {
     onChange = this.props.onChange;
 
     asyncGetLocation = async () => {
-        // const result = await request(urls.getLocation, { data: {}, type: 'get' });
-        const result = await {
-            data: {
-                province: '河北省',
-                city: '石家庄市',
-            },
-            status: 'success',
-            code: 1000,
-            message: '',
-        };
+        const result = await request('/napi/account/addressByIp', { data: {}, type: 'get' });
+        // const result = await {
+        //     data: {
+        //         province: '河北省',
+        //         city: '石家庄市',
+        //     },
+        //     status: 'success',
+        //     code: 1000,
+        //     message: '',
+        // };
 
         if (result.code === 1000) {
             console.log('获取地址');
 
             return result.data;
         }
+
+        return result.data;
     };
 
     getLocation() {

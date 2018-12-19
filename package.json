@@ -107,6 +107,7 @@
         "happypack": "^5.0.0-beta.4",
         "html-webpack-plugin": "^4.0.0-alpha",
         "husky": "^1.0.0-rc.13",
+        "koa-proxies": "^0.8.1",
         "lint-staged": "^7.2.0",
         "md5": "^2.2.1",
         "mini-css-extract-plugin": "^0.4.0",

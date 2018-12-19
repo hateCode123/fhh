@@ -2,17 +2,15 @@ import { createReducers, createActions, request } from '../../utils/';
 import { combineReducers } from 'redux';
 // import { APIHOST } from '../../config';
 // import { getUrlParams } from './utils';
-const LOCATIONIP = 'http://test0.fhh.ifeng.com';
-const apiInterfaceHost = `${LOCATIONIP}/napi`;
-const APIHOST = apiInterfaceHost;
+const APIHOST = '';
 
 const urls = {
-    getChannel: `${APIHOST}/category/findList`, // 获取专注领域
-    queryUsernameKeywords: `${APIHOST}/pc/account/checkIllegalName`, // 验证关键字
-    getLocation: `${APIHOST}/account/addressByIp`, // 获取用户地址
-    checkPhoneNum: `${APIHOST}/pc/check/tel`, // 校验手机号
-    getSms: `${APIHOST}/send/sms`, // 获取验证码
-    register: `${LOCATIONIP}/api/account/register`, // 注册接口
+    getChannel: `${APIHOST}/napi/category/findList`, // 获取专注领域
+    queryUsernameKeywords: `${APIHOST}/napi/pc/account/checkIllegalName`, // 验证关键字
+    getLocation: `${APIHOST}/napi/account/addressByIp`, // 获取用户地址
+    checkPhoneNum: `${APIHOST}/napi/pc/check/tel`, // 校验手机号
+    getSms: `${APIHOST}/napi/send/sms`, // 获取验证码
+    register: `${APIHOST}/api/account/register`, // 注册接口
 };
 const path = name => `register:inputInfoQtrz:${name}`;
 
@@ -95,37 +93,37 @@ export const asyncGetChannel = () => {
                 level: 1,
                 type: 1,
             };
-            // const result = await request(urls.getChannel, { data: params, type: 'get' });
-            const result = await {
-                success: true,
-                data: {
-                    rows: [
-                        {
-                            name: '凤凰',
-                            id: '5854cc129cd31025a647acc4',
-                        },
-                        {
-                            name: '百科',
-                            id: '5854cc129cd31025a647acb1',
-                        },
-                        {
-                            name: '争鸣',
-                            id: '5854cc129cd31025a647accc',
-                        },
-                        {
-                            name: '时政',
-                            id: '5858d867afbea52c129b4773',
-                        },
-                        {
-                            name: '国际',
-                            id: '5854cc129cd31025a647acb6',
-                        },
-                    ],
-                },
-                status: 'success',
-                code: 1000,
-                message: '',
-            };
+            const result = await request(urls.getChannel, { data: params, type: 'get' });
+            // const result = await {
+            //     success: true,
+            //     data: {
+            //         rows: [
+            //             {
+            //                 name: '凤凰',
+            //                 id: '5854cc129cd31025a647acc4',
+            //             },
+            //             {
+            //                 name: '百科',
+            //                 id: '5854cc129cd31025a647acb1',
+            //             },
+            //             {
+            //                 name: '争鸣',
+            //                 id: '5854cc129cd31025a647accc',
+            //             },
+            //             {
+            //                 name: '时政',
+            //                 id: '5858d867afbea52c129b4773',
+            //             },
+            //             {
+            //                 name: '国际',
+            //                 id: '5854cc129cd31025a647acb6',
+            //             },
+            //         ],
+            //     },
+            //     status: 'success',
+            //     code: 1000,
+            //     message: '',
+            // };
             let data = '';
 
             // console.log('获取频道');
@@ -162,15 +160,16 @@ export const asyncQueryKeywords = str => {
 
         if (str) {
             const userName = str;
-            // await request(urls.queryUsernameKeywords, {data:{userName}, type:'get'})
-            const result = {
-                data: {
-                    isIllegal: false,
-                },
-                status: 'success',
-                code: 1001,
-                message: '',
-            };
+
+            const result = await request(urls.queryUsernameKeywords, { data: { userName }, type: 'get' });
+            // const result = {
+            //     data: {
+            //         isIllegal: false,
+            //     },
+            //     status: 'success',
+            //     code: 1001,
+            //     message: '',
+            // };
             let errorMsg = '';
 
             if (result.code === 1000) {
@@ -191,16 +190,16 @@ export const asyncQueryPhoneNum = str => {
         await console.log(str);
 
         if (str) {
-            const phoneNum = str;
-            // const resut = await request(urls.queryUsernameKeywords, {data:{phoneNum}, type:'get'})
-            const result = {
-                data: {
-                    isExist: false,
-                },
-                status: 'success',
-                code: 1000,
-                message: '',
-            };
+            const operatorTelephone = str;
+            const result = await request(urls.checkPhoneNum, { data: { operatorTelephone } });
+            // const result = {
+            //     data: {
+            //         isExist: false,
+            //     },
+            //     status: 'success',
+            //     code: 1000,
+            //     message: '',
+            // };
             let errorMsg = '';
 
             if (result.code === 1000) {
@@ -222,25 +221,25 @@ export const asyncGetValidateCode = str => {
         console.log('获取验证码');
         console.log(str);
         const operatorTelephone = str;
-        // const res = await request(urls.getSms, {data: {operatorTelephone}});
-        const res1 = {
-            data: {
-                isExist: true,
-            },
-            status: 'success',
-            code: 1000,
-            message: '',
-        };
-        const res2 = {
-            data: null,
-            status: 'success',
-            code: 2002,
-            message: '手机号不合法',
-        };
+        const res = request(urls.getSms, { data: { operatorTelephone } });
+        // const res1 = {
+        //     data: {
+        //         isExist: true,
+        //     },
+        //     status: 'success',
+        //     code: 1000,
+        //     message: '',
+        // };
+        // const res2 = {
+        //     data: null,
+        //     status: 'success',
+        //     code: 2002,
+        //     message: '手机号不合法',
+        // };
         let errorMsg = '';
 
-        if (res2.code === 2002) {
-            errorMsg = res2.message;
+        if (res.code === 2002) {
+            errorMsg = res.message;
 
             return errorMsg;
         }
@@ -267,17 +266,19 @@ export const asyncRegister = () => {
         try {
             console.log(getState());
 
-            let result = await {
-                data: null,
-                status: 'success',
-                code: 1000,
-                message: '自媒体名称已经存在111',
-            };
+            // let result = await {
+            //     data: null,
+            //     status: 'success',
+            //     code: 1000,
+            //     message: '自媒体名称已经存在111',
+            // };
 
             if (getState().inputInfoQtrz.registerValues.agree) {
                 const params = getRegisterParams(getState);
 
                 console.log(params);
+                const result = await request(urls.register, { data: params, type: 'post' });
+
                 if (result.code === 1000) {
                     console.log('注册成功');
                     dispatch(actions.changeRegisterStatus('success'));
